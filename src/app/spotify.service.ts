@@ -15,4 +15,13 @@ export class SpotifyService {
   getUserData(token) {
     return this.http.get('https://api.spotify.com/v1/me',{headers:{Authorization:'Bearer '+token}})
   }
+  getPlaylists(token) {
+    return this.http.get('https://api.spotify.com/v1/me/playlists',{headers:{Authorization:'Bearer '+token}})
+  }
+  getYellowTracks(token,url='https://api.spotify.com/v1/users/tw3ek/playlists/6kfBKFgsAPO3WgQdyqDsML/tracks') {
+    return this.http.get(url,{headers:{Authorization:'Bearer '+token}})
+  }
+  getTracks(token,url) {
+
+  }
 }
