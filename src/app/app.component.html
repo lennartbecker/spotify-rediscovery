@@ -7,6 +7,8 @@
 <a routerLink="/main">Main</a>
 <p>{{hallo}}</p>
 <button (click)="getUserData()">Get Userdata</button>
-<button (click)="getYellowTracks()">Get Yellow</button>
+<button (click)="startLoading()">Get Yellow</button>
 
-<pre>{{playlists}}</pre>
+<ul>
+    <li *ngFor="let playlist of playlists" (click)="getTracks(playlist.id)">{{playlist.name}}</li>
+</ul>
