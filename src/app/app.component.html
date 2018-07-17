@@ -10,5 +10,5 @@
 <button (click)="startLoading()">Get Yellow</button>
 
 <ul>
-    <li *ngFor="let playlist of playlists" (click)="getTracks(playlist.id)">{{playlist.name}}</li>
+    <li *ngFor="let playlist of playlists" (click)="getTracks(playlist.href)">{{playlist.name}}</li>
 </ul>
