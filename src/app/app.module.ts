@@ -13,12 +13,12 @@ import { AuthorizeComponent } from './authorize/authorize.component';
     AppComponent,
     LoginComponent,
     MainPanelComponent,
-    AuthorizeComponent
+    AuthorizeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
