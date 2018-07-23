@@ -39,6 +39,7 @@ export class AppComponent {
       await this.getTracks(playlist.tracks.href, playlist.id)
     }
     console.log(this.playlistTracks)
+    this.filterByDate("test")
   }
   async getUserData() {
     let token = this.getAccessToken()
@@ -64,12 +65,11 @@ export class AppComponent {
     let token = this.getAccessToken()
     let data: any = await this.spotify.getTracks(url, token)
     if (this.playlistTracks[id]) {
-      this.playlistTracks[id].push(...data.items) // = [...this.playlistTracks[id],...data.items]
-    }else {
+      this.playlistTracks[id].push(...data.items)
+    } else {
       this.playlistTracks[id] = data.items
     }
     if (data.next) {
-      console.log(data)
       this.getTracks(data.next, id)
     }
   }
@@ -77,9 +77,17 @@ export class AppComponent {
     let token = this.auth.getAccessToken()
     return token
   }
-  filterByDate(from) {
-    this.playlists.forEach(playlist => {
-      // console.
-    });
+  filterByDate(playlists) {
+    for (const playlist in this.playlistTracks) {
+      this.playlistTracks[playlist].forEach(track => {
+        let date = Date.parse(track.added_at)
+        let to = Date.parse('2018-03-01T07:58:10Z')
+        let from = Date.parse('2018-01-01T07:58:10Z')
+        if(date > from && date < to) {
+          console.log(track.track.name)
+        }
+      });
+    }
+      
   }
 } 
