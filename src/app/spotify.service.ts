@@ -20,7 +20,6 @@ export class SpotifyService {
   }
   getTracks(url, token, offset = 0) {
     let params = { fields: "items(added_at,added_by,track(album,artists,id,href,uri,name))", offset }
-
     return this.http.get(url, { headers: { Authorization: 'Bearer ' + token } }).toPromise()
   }
 }

@@ -24,28 +24,26 @@ interface track {
 })
 export class AppComponent {
   constructor(private auth: AuthorizeService, private spotify: SpotifyService) { }
-  user:string;
+  user: string;
+  temptracks;
   playlists: any[] = [];
+  playlistTracks = {};
   clientid = '0224b8e36c9f4b698876dc79b4b88fe7'
   callback = 'http%3A%2F%2Flocalhost%3A4200%2Fcallback'
   url = `https://accounts.spotify.com/authorize?client_id=` + this.clientid + `&redirect_uri=` + this.callback + `&scope=user-read-private%20user-read-email&response_type=token`
-  tracks = [];
-  test = []
-
   async startLoading() {
-    let testarray = []
     await this.getUserData()
     await this.getPlayLists()
-    // for (let i = 0; i < this.playlists.length; i++) {
-    //  await this.getTracks(this.playlists[i].tracks.href)
-    // }
-    // console.log(this.tracks)
+    for (let i = 0; i < this.playlists.length; i++) {
+      let playlist = this.playlists[i]
+      await this.getTracks(playlist.tracks.href, playlist.id)
+    }
+    console.log(this.playlistTracks)
   }
   async getUserData() {
     let token = this.getAccessToken()
-    let userdata:any = await this.spotify.getUserData(token)
+    let userdata: any = await this.spotify.getUserData(token)
     this.user = userdata.id;
-
   }
   async getPlayLists(offset = 0, limit = 20) {
     let token = this.getAccessToken()
@@ -62,19 +60,26 @@ export class AppComponent {
     });
     console.log(this.playlists)
   }
-  async getTracks(url) {
+  async getTracks(url, id) {
     let token = this.getAccessToken()
     let data: any = await this.spotify.getTracks(url, token)
-    this.tracks.push(...data.items)
+    if (this.playlistTracks[id]) {
+      this.playlistTracks[id].push(...data.items) // = [...this.playlistTracks[id],...data.items]
+    }else {
+      this.playlistTracks[id] = data.items
+    }
     if (data.next) {
-      this.getTracks(data.next)
-    } else {
-
-      return true;
+      console.log(data)
+      this.getTracks(data.next, id)
     }
   }
   getAccessToken() {
     let token = this.auth.getAccessToken()
     return token
+  }
+  filterByDate(from) {
+    this.playlists.forEach(playlist => {
+      // console.
+    });
   }
 } 
