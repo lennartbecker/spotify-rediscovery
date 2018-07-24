@@ -78,6 +78,7 @@ export class AppComponent {
     return token
   }
   filterByDate() {
+    this.filteredTracks = []
     for (const playlist in this.playlistTracks) {
       this.playlistTracks[playlist].forEach(track => {
         let date = Date.parse(track.added_at)

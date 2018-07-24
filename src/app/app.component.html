@@ -1,18 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <head>
-    <title>Test</title>
+    <title>Time Machine</title>
 </head>
 <router-outlet></router-outlet>
-<a href="{{url}}" >Login</a>
-<a routerLink="/main">Main</a>
-<p>{{hallo}}</p>
-<button (click)="getUserData()">Get Userdata</button>
-<button (click)="startLoading()">Get PL</button>
 
-
-<input type="date" [(ngModel)]="from">
-<input type="date" [(ngModel)]="to">
-<ul>
-    <li *ngFor="let track of filteredTracks">{{track}}</li>
-</ul>
-<button (click)="filterByDate()">Get Tracks</button>

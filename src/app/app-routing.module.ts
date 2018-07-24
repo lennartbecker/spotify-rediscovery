@@ -8,7 +8,9 @@ import { AuthorizeComponent } from './authorize/authorize.component';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'main', component: MainPanelComponent},
-  {path: 'callback', component: AuthorizeComponent}
+  {path: 'callback', component: AuthorizeComponent},
+  {path: '', component: LoginComponent}
+
 ]
 @NgModule({
   exports:[RouterModule],
