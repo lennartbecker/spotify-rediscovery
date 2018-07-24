@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthorizeService } from './authorize.service';
 import { SpotifyService } from './spotify.service';
-
 interface data {
   items: string[];
   length;
@@ -25,8 +24,10 @@ interface track {
 export class AppComponent {
   constructor(private auth: AuthorizeService, private spotify: SpotifyService) { }
   user: string;
-  temptracks;
+  to;
+  from;
   playlists: any[] = [];
+  filteredTracks = []
   playlistTracks = {};
   clientid = '0224b8e36c9f4b698876dc79b4b88fe7'
   callback = 'http%3A%2F%2Flocalhost%3A4200%2Fcallback'
@@ -39,7 +40,6 @@ export class AppComponent {
       await this.getTracks(playlist.tracks.href, playlist.id)
     }
     console.log(this.playlistTracks)
-    this.filterByDate("test")
   }
   async getUserData() {
     let token = this.getAccessToken()
@@ -77,17 +77,17 @@ export class AppComponent {
     let token = this.auth.getAccessToken()
     return token
   }
-  filterByDate(playlists) {
+  filterByDate() {
     for (const playlist in this.playlistTracks) {
       this.playlistTracks[playlist].forEach(track => {
         let date = Date.parse(track.added_at)
-        let to = Date.parse('2018-03-01T07:58:10Z')
-        let from = Date.parse('2018-01-01T07:58:10Z')
-        if(date > from && date < to) {
-          console.log(track.track.name)
+        let toDate = Date.parse(this.to)
+        let fromDate = Date.parse(this.from)
+        if(date > fromDate && date < toDate) {
+          this.filteredTracks.push(track.track.name)
         }
       });
     }
-      
+    console.log(this.filteredTracks)
   }
 } 

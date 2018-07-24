@@ -8,6 +8,11 @@
 <p>{{hallo}}</p>
 <button (click)="getUserData()">Get Userdata</button>
 <button (click)="startLoading()">Get PL</button>
+
+
+<input type="date" [(ngModel)]="from">
+<input type="date" [(ngModel)]="to">
 <ul>
-    <li *ngFor="let playlist of playlists" (click)="getTracks(playlist.tracks.href)">{{playlist.name}}</li>
+    <li *ngFor="let track of filteredTracks">{{track}}</li>
 </ul>
+<button (click)="filterByDate()">Get Tracks</button>
