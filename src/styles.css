@@ -4,10 +4,11 @@ body {
     color: white;
 }
 *{
-    margin: 0 auto;
+    margin: 0px;
     font-family: 'Open Sans', sans-serif;
     outline: none;
     outline: 0;
+    padding: 0px;
 }
 .wrapper {
     width:95%;
