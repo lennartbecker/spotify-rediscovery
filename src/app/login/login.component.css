@@ -7,6 +7,10 @@
     background-color: #1ed760;
 }
 .btn{
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 .5% 0 .5%;
+    cursor: pointer;
     font-weight: 700; 
     font-size: 14px;
     line-height: 1;
@@ -38,25 +42,17 @@
     flex-direction: row;
     margin-top: 30%
 }
-.wrapper {
-    width:95%;
-    margin-left: auto;
-    margin-right: auto;
-    height:85vh;
-} 
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    min-height: 100vh;
-} 
 .centerbox {
     text-align: center;
     width: 100%;
 }
 h1{
-    margin-bottom: 12px;
+    margin: .5em 0 .25em;
     font-weight: 700;
-    font-size: 36px;
+    font-size: 70px;
+}
+h4{
+    margin: .5em 0 1em;
+    font-size: 18px;
+    font-weight: 400;
 }

@@ -1,0 +1,32 @@
+.center{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center */
+}
+.filterPanel{
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.filterSettings{
+    background-color: red;
+    width: 100%;
+}
+.filteredTracks{
+    /* background-color: #191414;
+    opacity: 50%;
+    width: 100%;
+    min-height: 78vh;
+    margin-bottom: 2vh;
+    border-radius: 20px; */
+
+}
+.albumCard {
+    min-width: 20%;
+    min-height: 10vh;
+    background-color: white;
+}

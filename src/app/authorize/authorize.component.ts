@@ -16,7 +16,6 @@ export class AuthorizeComponent implements OnInit {
   ngOnInit() {
     let urlParams = this.route.snapshot.fragment.split("&");
     this.auth.setAccessToken(urlParams[0].split("=")[1])
-
     this.router.navigate(['/main'])
   }
 

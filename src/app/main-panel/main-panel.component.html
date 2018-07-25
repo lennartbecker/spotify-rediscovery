@@ -1,10 +1,16 @@
-<button (click)="getUserData()">Get Userdata</button>
-<button (click)="startLoading()">Get PL</button>
+<div class="wrapper">
+    <div class="center">
+        <div class="filterPanel">
+            <!-- <h1>Hey {{user}}. Let's rediscover some tracks!</h1> -->
 
+            <div class="filterSettings">
+                <input type="date" > <!--[(ngModel)]="from" -->
+                <input type="date" > <!-- [(ngModel)]="to"-->
+                <!-- <button (click)="filterByDate()">Get Tracks</button> -->
+            </div>
+            <div class="filteredTracks">
 
-<input type="date" [(ngModel)]="from">
-<input type="date" [(ngModel)]="to">
-<ul>
-    <li *ngFor="let track of filteredTracks">{{track}}</li>
-</ul>
-<button (click)="filterByDate()">Get Tracks</button>
+            </div>
+        </div>
+    </div>
+</div>
