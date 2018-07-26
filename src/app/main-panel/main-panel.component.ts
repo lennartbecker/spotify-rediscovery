@@ -9,26 +9,27 @@ import { SpotifyService } from '../spotify.service';
 })
 export class MainPanelComponent implements OnInit {
 
-  constructor(private auth:AuthorizeService,private spotify:SpotifyService) { }
+  constructor(private auth: AuthorizeService, private spotify: SpotifyService) { }
 
   ngOnInit() {
-    //  this.startLoading()
+    this.startLoading()
   }
   user: string;
   to;
   from;
   playlists: any[] = [];
   filteredTracks = []
-  playlistTracks = {};
-
+  tracks = {};
   async startLoading() {
     await this.getUserData()
-    await this.getPlayLists()
+    this.playlists = await this.getPlayLists()
+    this.playlists = this.filterForUsersPlaylists(this.playlists)
     for (let i = 0; i < this.playlists.length; i++) {
+      console.log(this.playlists.length)
       let playlist = this.playlists[i]
-      await this.getTracks(playlist.tracks.href, playlist.id)
+      await this.getTracks(playlist.tracks.href, playlist.id,playlist.name) 
     }
-    console.log(this.playlistTracks)
+    console.log(this.tracks)
   }
 
   async getUserData() {
@@ -37,42 +38,46 @@ export class MainPanelComponent implements OnInit {
     this.user = userdata.id;
   }
 
-  async getPlayLists(offset = 0, limit = 20) {
-    let token = this.getAccessToken()
+  async getPlayLists(offset = 0, limit = 20,prevPlaylists = []) {
+    let token = this.getAccessToken();
     let playlist: any = await this.spotify.getPlaylists(token, offset, limit)
-
+    prevPlaylists.push(...playlist.items)
     if (playlist.next) {
       offset = +20
-      this.getPlayLists(offset, limit)
+      return this.getPlayLists(offset, limit,prevPlaylists)
+    } else {
+      return prevPlaylists
     }
-
-    this.getUsersPlaylists(playlist);
-    console.log(this.playlists)
   }
-  private getUsersPlaylists(playlist: any) {
-    playlist.items.forEach(playlist => {
+  filterForUsersPlaylists(playlist: any) {
+    let filteredPlaylists = []
+    playlist.forEach(playlist => {
       if (playlist.owner.id == this.user && !playlist.collaborative) {
-        this.playlists.push(playlist);
+        filteredPlaylists.push(playlist);
       }
     });
+    return filteredPlaylists;
   }
 
-  async getTracks(url, id) {
+  async getTracks(url,id,name) {
     let token = this.getAccessToken()
     let data: any = await this.spotify.getTracks(url, token)
-
+    data.items.forEach(track => {
+      track.playlist = {id,name}
+    });
+    console.log(data)
     this.saveToTracksObject(id, data);
 
-    if (data.next) {
-      this.getTracks(data.next, id)
-    }
+    // if (data.next) {
+    //   this.getTracks(data)
+    // }
   }
   private saveToTracksObject(id: any, data: any) {
-    if (this.playlistTracks[id]) {
-      this.playlistTracks[id].push(...data.items);
+    if (this.tracks[id]) {
+      this.tracks[id].push(...data.items);
     }
     else {
-      this.playlistTracks[id] = data.items;
+      this.tracks[id] = data.items;
     }
   }
 
@@ -82,16 +87,20 @@ export class MainPanelComponent implements OnInit {
   }
 
   filterByDate() {
+
+
     this.filteredTracks = []
     for (const playlist in this.playlistTracks) {
-      this.playlistTracks[playlist].forEach(track => {
 
+      this.playlistTracks[playlist].forEach(track => {
+        track.album = playlist
         let date = Date.parse(track.added_at)
         let toDate = Date.parse(this.to)
         let fromDate = Date.parse(this.from)
+        console.log(track)
 
         if (date > fromDate && date < toDate) {
-          this.filteredTracks.push(track.track.name)
+          this.filteredTracks.push(track)
         }
       });
     }

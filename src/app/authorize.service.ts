@@ -8,12 +8,16 @@ export class AuthorizeService {
   accesstoken;
 
 
-  constructor(private http:HttpClient) { 
+  constructor(private http: HttpClient) {
   }
   getAccessToken() {
+    if(localStorage.getItem('sr_accesstoken')){
+      this.accesstoken = localStorage.getItem('sr_accesstoken')
+    }
     return this.accesstoken
   }
-   setAccessToken(token) {
+  setAccessToken(token) {
+    localStorage.setItem('sr_accesstoken',token)
     this.accesstoken = token;
-   }
+  }
 }

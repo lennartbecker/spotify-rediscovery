@@ -3,47 +3,33 @@
         <!-- <h1>Hey {{user}}. Let's rediscover some tracks!</h1> -->
 
         <div class="filterSettings">
-            <input type="date">
-            <!--[(ngModel)]="from" -->
-            <input type="date">
-            <!-- [(ngModel)]="to"-->
-            <!-- <button (click)="filterByDate()">Get Tracks</button> -->
+            <input type="date" [(ngModel)]="from">
+            <input type="date" [(ngModel)]="to">
+            <button (click)="filterByDate()">Get Tracks</button>
         </div>
         <div class="filteredTracks">
 
             <div class="card-grid">
-                <div class="albumCard">
-                    <div class="card-image">
-                        <img src="https://is2-ssl.mzstatic.com/image/thumb/Music60/v4/41/f9/c6/41f9c6cb-528f-28c4-8181-227550ba20e3/source/1200x1200bb.jpg"
-                            alt="">
-                    </div>
-                    <div class="albumDesc">
-                        <h1>Test</h1>
-                        <h4>artist</h4>
-                    </div>
-                </div>
 
-                <div class="albumCard">
-                    <div class="card-image">
-                        <img src="https://is2-ssl.mzstatic.com/image/thumb/Music60/v4/41/f9/c6/41f9c6cb-528f-28c4-8181-227550ba20e3/source/1200x1200bb.jpg"
-                            alt="">
+                <!-- <div class="card slide-up" test="let track of playlistTracks">
+                    <div class="card-container">
+                        <div class="card-image" style="background-image: url('https://f4.bcbits.com/img/a1092278119_10.jpg')"></div>
                     </div>
-                    <div class="albumDesc">
-                        <h1>Test</h1>
-                        <h4>artist</h4>
+                    <div class="mobile-title">
+                        <div class="content">
+                            <p class="title">Waves</p>
+                            <p class="subtitle">Felly</p>
+                        </div>
                     </div>
-                </div>
-
-                <div class="albumCard">
-                    <div class="card-image">
-                        <img src="https://is2-ssl.mzstatic.com/image/thumb/Music60/v4/41/f9/c6/41f9c6cb-528f-28c4-8181-227550ba20e3/source/1200x1200bb.jpg"
-                            alt="">
+                    <div class="card-body content">
+                        <p>test
+                            erste sahne an test und filmmusik
+                        </p>
                     </div>
-                    <div class="albumDesc">
-                        <h1>Test</h1>
-                        <h4>artist</h4>
+                    <div class="card-footer content">
+                        2 min. read 22 comments
                     </div>
-                </div>
+                </div> -->
             </div>
 
         </div>
