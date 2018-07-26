@@ -25,7 +25,6 @@ export class MainPanelComponent implements OnInit {
     this.playlists = await this.getPlayLists()
     this.playlists = this.filterForUsersPlaylists(this.playlists)
     for (let i = 0; i < this.playlists.length; i++) {
-      console.log(this.playlists.length)
       let playlist = this.playlists[i]
       await this.getTracks(playlist.tracks.href, playlist.id,playlist.name) 
     }
@@ -65,12 +64,11 @@ export class MainPanelComponent implements OnInit {
     data.items.forEach(track => {
       track.playlist = {id,name}
     });
-    console.log(data)
     this.saveToTracksObject(id, data);
 
-    // if (data.next) {
-    //   this.getTracks(data)
-    // }
+    if (data.next) {
+      this.getTracks(data.next,id,name)
+    }
   }
   private saveToTracksObject(id: any, data: any) {
     if (this.tracks[id]) {
@@ -90,9 +88,8 @@ export class MainPanelComponent implements OnInit {
 
 
     this.filteredTracks = []
-    for (const playlist in this.playlistTracks) {
-
-      this.playlistTracks[playlist].forEach(track => {
+    for (const playlist in this.tracks) {
+      this.tracks[playlist].forEach(track => {
         track.album = playlist
         let date = Date.parse(track.added_at)
         let toDate = Date.parse(this.to)

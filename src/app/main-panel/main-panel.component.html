@@ -4,6 +4,7 @@
 
         <div class="filterSettings">
             <input type="date" [(ngModel)]="from">
+            <!--[(ngModel)]="from" -->
             <input type="date" [(ngModel)]="to">
             <button (click)="filterByDate()">Get Tracks</button>
         </div>
@@ -11,14 +12,14 @@
 
             <div class="card-grid">
 
-                <!-- <div class="card slide-up" test="let track of playlistTracks">
+                <div class="card slide-up" *ngFor="let track of filteredTracks"> 
                     <div class="card-container">
-                        <div class="card-image" style="background-image: url('https://f4.bcbits.com/img/a1092278119_10.jpg')"></div>
+                        <div class="card-image" [ngStyle]="{'background-image':'url(' + track.track.album.images[0].url + ')'}"></div>
                     </div>
                     <div class="mobile-title">
                         <div class="content">
-                            <p class="title">Waves</p>
-                            <p class="subtitle">Felly</p>
+                            <p class="title">{{track.track.name}}</p>
+                            <p class="subtitle">{{track.track.artists[0].name}}</p>
                         </div>
                     </div>
                     <div class="card-body content">
@@ -29,7 +30,7 @@
                     <div class="card-footer content">
                         2 min. read 22 comments
                     </div>
-                </div> -->
+                </div>
             </div>
 
         </div>
