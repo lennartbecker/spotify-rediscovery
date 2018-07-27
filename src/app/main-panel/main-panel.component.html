@@ -12,27 +12,52 @@
 
             <div class="card-grid">
 
-                <div class="card slide-up" *ngFor="let track of filteredTracks"> 
-                    <div class="card-container">
-                        <div class="card-image" [ngStyle]="{'background-image':'url(' + track.track.album.images[0].url + ')'}"></div>
-                    </div>
-                    <div class="mobile-title">
-                        <div class="content">
-                            <p class="title">{{track.track.name}}</p>
-                            <p class="subtitle">{{track.track.artists[0].name}}</p>
+                <div class="card">
+                    <div class="front">
+                        <div class="imageWindow-max">
+
+                        </div>
+                        <div class="info-min">
+                            <h3>Waking up to Sirens</h3>
+                            <p>Felly</p>
                         </div>
                     </div>
-                    <div class="card-body content">
-                        <p>test
-                            erste sahne an test und filmmusik
-                        </p>
-                    </div>
-                    <div class="card-footer content">
-                        2 min. read 22 comments
+                    <div class="back">
+                        <div class="imageWindow-min">
+
+                        </div>
+                        <div class="info-max">
+                            <h3>Waking up to Sirens</h3>
+                            <p>Felly</p>
+                        </div>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="front">
+
+                    </div>
+                    <div class="back">
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="front">
+
+                    </div>
+                    <div class="back">
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="front">
+
+                    </div>
+                    <div class="back">
+
+                    </div>
+                </div>
+
             </div>
 
         </div>
     </div>
-</div>
