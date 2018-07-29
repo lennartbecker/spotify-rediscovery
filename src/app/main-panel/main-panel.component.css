@@ -27,9 +27,10 @@
     grid-gap: 1rem;
 }
 .card{
-  height: 40vh;
   max-width: 300px;  
+  min-width: 250px;
   border-radius: 20px;
+  min-height: 400px;
 }
 .front {
   background-color: white;
@@ -39,44 +40,60 @@
   background-repeat: no-repeat;
   height: 100%;
   width: 100%;
-  display: block;
-  border-radius: 20px;
-
-}
-.card:hover .back{
-  opacity: 1;
-  transition: .3s ease-in;
-}
-.back{
-  transition: .3s ease-in-out;
-  background-image:url('https://f4.bcbits.com/img/a0042959868_10.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  position: relative;
-  top: -100%; 
-  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
 }
 .imageWindow-min{
   width: 100%;
   height: 60%;
 }
-.info-max{
-  width: 100%;
-  height: 40%;
+.info{
   background-color: white;
-  border-radius: 20px;
+  border-radius: 0 0 10px 10px;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* box-shadow: 0px -7px 6px #1c1c1cb3; */
 }
-.imageWindow-max{
-  width: 100%;
-  height: 70%;
+.date{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
-.info-min{
-  width: 100%;
-  height: 30%;
-  background-color: white;
-  border-radius: 20px;
+.date p {
+  padding-left: 2%;
+  font-weight: 300;
+  font-size: 15px;
+}
+.extra_info{
+  height: 0;
+  overflow: hidden;
+  transition: height .3s ease;
+}
+.extra_info p {
+  font-size: 15 px;
+  font-weight: 300;
+  font-style: italic;
+}
+.card:hover .extra_info{
+  height: 70px;
+}
+.main{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.title{
+
+}
+.artist{
+  font-size: 15px;
+}
+.album{
+  font-size: 15px;
+  font-weight: 300;
 }
