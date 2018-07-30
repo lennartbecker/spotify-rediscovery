@@ -12,30 +12,36 @@
 
             <div class="card-grid">
 
-                <div class="card">
-                    <div class="front">
-                        <div class="imageWindow-max">
+                <div class="card" *ngFor="let track of filteredTracks">
+                    <div id="checkiflocal">
 
+                    </div>
+                    <div class="front">
+                        <div class="image" [ngStyle]="{'background-image': 'url(' + track.track.album.images[1].url + ')'}">
+                            <!-- <img *ngIf="track.track.album.images" src="{{track.track.album.images[1].url}}" alt=""> -->
                         </div>
                         <div class="info">
                             <div class="extra_info">
                                 <div class="date">
                                     <i class="far fa-calendar-alt"></i>
-                                    <p>27.08.2017</p>
+                                    <p>{{track.added_at}}</p>
                                 </div>
-                                <h5>Playlist:</h5>
-                                <p>erste sahne an intros und filmmusik</p>
+                                <p>Playlist:</p>
+                                <p>{{track.playlist.name}}</p>
                             </div>
                             <div class="main">
-                                <h3 class="title">Waking up to Sirens</h3>
-                                <p class="artist">Felly</p>
-                                <p class="album">Watching movies with the sound ...</p>
+                                <h3 class="title">{{track.track.name}}</h3>
+                                <p class="artist">{{track.track.artists[0].name}}</p>
+                                <p class="album">{{track.album.name}}</p>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
 
             </div>
 
         </div>
     </div>
+</div>

@@ -24,11 +24,11 @@ export class MainPanelComponent implements OnInit {
     await this.getUserData()
     this.playlists = await this.getPlayLists()
     this.playlists = this.filterForUsersPlaylists(this.playlists)
+
     for (let i = 0; i < this.playlists.length; i++) {
       let playlist = this.playlists[i]
-      await this.getTracks(playlist.tracks.href, playlist.id,playlist.name) 
+      await this.getTracks(playlist.tracks.href, playlist.id, playlist.name)
     }
-    console.log(this.tracks)
   }
 
   async getUserData() {
@@ -37,13 +37,13 @@ export class MainPanelComponent implements OnInit {
     this.user = userdata.id;
   }
 
-  async getPlayLists(offset = 0, limit = 20,prevPlaylists = []) {
+  async getPlayLists(offset = 0, limit = 20, prevPlaylists = []) {
     let token = this.getAccessToken();
     let playlist: any = await this.spotify.getPlaylists(token, offset, limit)
     prevPlaylists.push(...playlist.items)
     if (playlist.next) {
       offset = +20
-      return this.getPlayLists(offset, limit,prevPlaylists)
+      return this.getPlayLists(offset, limit, prevPlaylists)
     } else {
       return prevPlaylists
     }
@@ -58,16 +58,16 @@ export class MainPanelComponent implements OnInit {
     return filteredPlaylists;
   }
 
-  async getTracks(url,id,name) {
+  async getTracks(url, id, name) {
     let token = this.getAccessToken()
     let data: any = await this.spotify.getTracks(url, token)
     data.items.forEach(track => {
-      track.playlist = {id,name}
+      track.playlist = { id, name }
     });
     this.saveToTracksObject(id, data);
 
     if (data.next) {
-      this.getTracks(data.next,id,name)
+      this.getTracks(data.next, id, name)
     }
   }
   private saveToTracksObject(id: any, data: any) {
@@ -85,8 +85,6 @@ export class MainPanelComponent implements OnInit {
   }
 
   filterByDate() {
-
-
     this.filteredTracks = []
     for (const playlist in this.tracks) {
       this.tracks[playlist].forEach(track => {
@@ -94,10 +92,10 @@ export class MainPanelComponent implements OnInit {
         let date = Date.parse(track.added_at)
         let toDate = Date.parse(this.to)
         let fromDate = Date.parse(this.from)
-        console.log(track)
-
         if (date > fromDate && date < toDate) {
-          this.filteredTracks.push(track)
+          if (!track.is_local) {
+            this.filteredTracks.push(track)
+          }
         }
       });
     }
