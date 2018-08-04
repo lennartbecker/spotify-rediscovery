@@ -12,13 +12,39 @@
     justify-content: space-between;
 }
 .filterSettings{
-    background-color: red;
     width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    /* display: flex;
+    flex-direction: row; */
+    /* justify-content: space-around */
+}
+.filterButton {
+  background-color: #1db954;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 .5% 0 .5%;
+  cursor: pointer;
+  font-weight: 700; 
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 500px;
+  padding: 16px 48px 18px;
+  -webkit-transition-property: background-color,border-color,color,-webkit-box-shadow,-webkit-filter;
+  transition-property: background-color,border-color,color,-webkit-box-shadow,-webkit-filter;
+  transition-property: background-color,border-color,color,box-shadow,filter;
+  transition-property: background-color,border-color,color,box-shadow,filter,-webkit-box-shadow,-webkit-filter;
+  -webkit-transition-duration: .3s;
+  transition-duration: .3s;
+  border-width: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: normal;
+  color: white;
 }
 .filteredTracks{
     width: 100%;
     min-height: 78vh;
-
 }
 .card-grid{
     display: grid;

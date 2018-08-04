@@ -9,20 +9,31 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthorizeComponent } from './authorize/authorize.component';
 import { FormsModule } from '@angular/forms';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {  MatNativeDateModule} from '@angular/material'
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainPanelComponent,
-    AuthorizeComponent,
+    AuthorizeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [MatNativeDateModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

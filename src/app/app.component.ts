@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthorizeService } from './authorize.service';
 import { SpotifyService } from './spotify.service';
+import 'hammerjs';
 interface data {
   items: string[];
   length;
