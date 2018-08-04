@@ -3,28 +3,30 @@
         <!-- <h1>Hey {{user}}. Let's rediscover some tracks!</h1> -->
 
         <div class="filterSettings">
-            <mat-form-field>
-                <input matInput [matDatepicker]="fromPicker" [(ngModel)]="from" placeholder="Choose a date">
-                <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
-                <mat-datepicker #fromPicker ></mat-datepicker>
-            </mat-form-field>
+            <div class="settingsBox">
+                <mat-form-field>
+                    <input matInput [matDatepicker]="fromPicker" [(ngModel)]="from" placeholder="From">
+                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fromPicker></mat-datepicker>
+                </mat-form-field>
+            </div>
 
-            <mat-form-field>
-                <input matInput [matDatepicker]="toPicker" [(ngModel)]="to" placeholder="Choose a date">
-                <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
-                <mat-datepicker #toPicker ></mat-datepicker>
-            </mat-form-field>
+            <div class="settingsBox">
+                <mat-form-field>
+                    <input matInput [matDatepicker]="toPicker" [(ngModel)]="to" placeholder="To">
+                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #toPicker></mat-datepicker>
+                </mat-form-field>
+            </div>
 
-                <a (click)="filterByDate()" class="filterButton">Get Tracks</a>
+                <div class="filterButtonDiv">
+                    <a (click)="filterByDate()" class="filterButton">Get Tracks</a>
+                </div>
+
 
         </div>
-        <div class="test">
 
-            
-        </div>
-
-        <div class="filteredTracks">
-
+        <div class="filteredTracks" *ngIf="showTracks">
             <div class="card-grid">
 
                 <div class="card" *ngFor="let track of filteredTracks">

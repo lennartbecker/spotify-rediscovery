@@ -9,15 +9,25 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+
 }
 .filterSettings{
-    width: 100%;
-    background-color: white;
-    border-radius: 10px;
-    /* display: flex;
-    flex-direction: row; */
-    /* justify-content: space-around */
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-evenly;
+  min-width: 800px;
+  max-width: 900px; 
+  padding-top: 1vh;
+  padding-bottom: 1vh
+  }
+.settingsBox {
+  margin-left: 3%;
+  margin-right: 3%;
 }
 .filterButton {
   background-color: #1db954;
@@ -41,6 +51,14 @@
   text-transform: uppercase;
   white-space: normal;
   color: white;
+}
+.filterButtonDiv {
+  width: 217px;
+  text-align: center;
+  text-justify: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .filteredTracks{
     width: 100%;

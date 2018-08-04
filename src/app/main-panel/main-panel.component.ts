@@ -19,6 +19,7 @@ export class MainPanelComponent implements OnInit {
   from;
   playlists: any[] = [];
   filteredTracks = []
+  showTracks:boolean = false;
   tracks = {};
   async startLoading() {
     await this.getUserData()
@@ -85,6 +86,7 @@ export class MainPanelComponent implements OnInit {
   }
 
   filterByDate() {
+    this.showTracks = true;
     this.filteredTracks = []
     for (const playlist in this.tracks) {
       this.tracks[playlist].forEach(track => {
