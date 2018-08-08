@@ -1,6 +1,6 @@
 <div class="wrapper">
     <div class="filterPanel">
-        <div class="heading">
+        <div class="heading" *ngIf="!showTracks">
             <h1>
                 Hey {{user}}, please select two Dates to select the tracks from.
             </h1>
@@ -20,10 +20,10 @@
                 <mat-datepicker #toPicker></mat-datepicker>
             </div>
 
-        <div class="filterButtonDiv settingsBox">
+        <div class="filterButtonDiv">
             <a (click)="filterByDate()" class="filterButton">Get Tracks</a>
         </div>
-        <div class="createPlaylistButtonDiv settingsBox" *ngIf="showTracks">
+        <div class="filterButtonDiv" *ngIf="showTracks">
             <a (click)="createPlaylist()" class="createPlaylistButton">Create Playlist</a>
         </div>
 

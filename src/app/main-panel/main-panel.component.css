@@ -2,17 +2,25 @@
     outline: 1px solid red; 
 } */
 *{
-    /* color:black; */
+    color:black;
 }
 .heading{
   color: white;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+h1{
+  color: white; 
 }
 .filterPanel{
+    padding-top: 5vh;
     width: 100%;
-    height: 100vh;
+    height: 95vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     align-content: center;
     align-items: center;
 }
@@ -25,6 +33,8 @@
   align-content: center;
   justify-content: center;
   align-items: center;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 #toPicker {
   border-radius: 20px!important;
@@ -45,6 +55,9 @@
 input::placeholder{
   color: black;
 }
+mat-datepicker-toggle {
+  color: #c8c8c8;
+}
 .filterSettings{
   background-color: white;
   border-radius: 10px;
@@ -54,8 +67,9 @@ input::placeholder{
   align-content: center;
   min-width: 800px;
   /* max-width: 900px;  */
-  padding-top: 2vh;
-  padding-bottom: 2vh;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 3vh;
   }
 .settingsBox {
   /* margin-left: 2%;
@@ -118,6 +132,8 @@ createPlaylistButtonDiv{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 .filteredTracks{
     width: 100%;
