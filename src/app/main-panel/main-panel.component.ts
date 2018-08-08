@@ -19,7 +19,7 @@ export class MainPanelComponent implements OnInit {
   from;
   playlists: any[] = [];
   filteredTracks = []
-  showTracks:boolean = false;
+  showTracks: boolean = false;
   tracks = {};
   async startLoading() {
     await this.getUserData()
@@ -95,11 +95,28 @@ export class MainPanelComponent implements OnInit {
         let toDate = Date.parse(this.to)
         let fromDate = Date.parse(this.from)
         if (date > fromDate && date < toDate) {
-          if (!track.is_local) {
-            this.filteredTracks.push(track)
-          }
+          this.insertTrack(track, date);
         }
       });
+    }
+    this.filteredTracks.sort(function (a, b) {
+      return Date.parse(a.added_at) - Date.parse(b.added_at)
+    })
+  }
+
+
+  private insertTrack(track: any, date: number) {
+    if (!track.is_local) {
+      let index = this.filteredTracks.map((mytrack) => mytrack.track.id).indexOf(track.track.id);
+      if (index == -1) {
+        this.filteredTracks.push(track);
+      }
+      else {
+        let currentTrackAdded = Date.parse(this.filteredTracks[index].added_at);
+        if (currentTrackAdded > date) {
+          this.filteredTracks[index] = track;
+        }
+      }
     }
   }
 }
