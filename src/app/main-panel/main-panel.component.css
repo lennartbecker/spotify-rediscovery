@@ -16,24 +16,31 @@
     align-content: center;
     align-items: center;
 }
-.input1{
+.dateInput{
+  border: 1px solid #c8c8c8;
+  padding: 0px 10px 0px 17px;
+  border-radius: 50px;
   display: flex;
   flex-direction: row;
-  justify-items: center;
+  align-content: center;
+  justify-content: center;
   align-items: center;
-  height: 100%;
-  /* border: 1px solid grey;
-  border-radius: 20px; */
 }
-.input1 input {
+#toPicker {
+  border-radius: 20px!important;
+}
+.mat-datepicker-content{
+  border-radius: 20px!important;
+}
+.dateInput input {
   appearance: none;
   outline: none;
-  /* font-size:1em; */
   background-color: transparent;
   color: black;
-  border: 1px solid grey;
-  padding: 10px 0px 10px 10px;
-  border-radius: 20px;
+  border: none;
+  /* border: 1px solid grey; */
+  /* padding: 10px 0px 10px 10px; */
+  /* border-radius: 20px; */
 }
 input::placeholder{
   color: black;
@@ -44,6 +51,7 @@ input::placeholder{
   display: flex;
   flex-direction: row; 
   justify-content: space-evenly;
+  align-content: center;
   min-width: 800px;
   /* max-width: 900px;  */
   padding-top: 2vh;

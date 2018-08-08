@@ -17,6 +17,12 @@ body {
     margin-right: auto;
     height:85vh;
 } 
+.mat-datepicker-content{
+    border-radius: 20px!important;
+  }
+.mat-calendar-period-button{
+    border-radius: 20px!important;
+}
 .center-container{
     display: flex;
     flex-direction: column;
