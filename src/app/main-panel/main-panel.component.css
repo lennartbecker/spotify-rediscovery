@@ -23,7 +23,8 @@
   min-width: 800px;
   max-width: 900px; 
   padding-top: 1vh;
-  padding-bottom: 1vh
+  padding-bottom: 1vh;
+  position: sticky;
   }
 .settingsBox {
   margin-left: 3%;
@@ -39,7 +40,7 @@
   font-size: 14px;
   line-height: 1;
   border-radius: 500px;
-  padding: 16px 48px 18px;
+  padding: 16px 30px 18px;
   -webkit-transition-property: background-color,border-color,color,-webkit-box-shadow,-webkit-filter;
   transition-property: background-color,border-color,color,-webkit-box-shadow,-webkit-filter;
   transition-property: background-color,border-color,color,box-shadow,filter;
