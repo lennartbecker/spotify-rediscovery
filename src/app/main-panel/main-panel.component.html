@@ -1,68 +1,71 @@
 <div class="wrapper">
     <div class="filterPanel">
-        <div class="heading" *ngIf="!showTracks">
-            <h1>
-                Hey {{user}}, please select two Dates to select the tracks from.
-            </h1>
-        </div>
 
-        <div class="filterSettings">
 
-            <div class="dateInput">
-                <input [matDatepicker]="fromPicker" (click)="fromPicker.open()" [(ngModel)]="from" placeholder="From">
-                <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
-                <mat-datepicker #fromPicker></mat-datepicker>
+        <div class="panel">
+            <div class="heading" *ngIf="!showTracks">
+                <h1>
+                    Hey {{user}}, please select two Dates to select the tracks from.
+                </h1>
             </div>
-
-            <div class="dateInput">
-                <input matInput [matDatepicker]="toPicker" (click)="toPicker.open()" [(ngModel)]="to" placeholder="To">
-                <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
-                <mat-datepicker #toPicker></mat-datepicker>
-            </div>
-
-        <div class="filterButtonDiv">
-            <a (click)="filterByDate()" class="filterButton">Get Tracks</a>
-        </div>
-        <div class="filterButtonDiv" *ngIf="showTracks">
-            <a (click)="createPlaylist()" class="createPlaylistButton">Create Playlist</a>
-        </div>
-
-
-    </div>
-
-    <div class="filteredTracks" *ngIf="showTracks">
-        <div class="card-grid">
-
-            <div class="card" *ngFor="let track of filteredTracks">
-                <div id="checkiflocal">
-
-                </div>
-                <div class="front">
-                    <div class="image" [ngStyle]="{'background-image': 'url(' + track.track.album.images[1].url + ')'}">
-                        <!-- <img *ngIf="track.track.album.images" src="{{track.track.album.images[1].url}}" alt=""> -->
+            <div class="filterSettings">
+                <div class="dates">
+                    <div class="dateInput">
+                        <input [matDatepicker]="fromPicker" (click)="fromPicker.open()" [(ngModel)]="from" placeholder="From">
+                        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #fromPicker></mat-datepicker>
                     </div>
-                    <div class="info">
-                        <div class="extra_info">
-                            <div class="date">
-                                <i class="far fa-calendar-alt"></i>
-                                <p>{{track.added_at}}</p>
+                    <div class="dateInput">
+                        <input matInput [matDatepicker]="toPicker" (click)="toPicker.open()" [(ngModel)]="to" placeholder="To">
+                        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #toPicker></mat-datepicker>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <div class="filterButtonDiv">
+                        <a (click)="filterByDate()" class="filterButton">Get Tracks</a>
+                    </div>
+                    <div class="filterButtonDiv" *ngIf="showTracks">
+                        <a (click)="createPlaylist()" class="createPlaylistButton">Create Playlist</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="filteredTracks" *ngIf="showTracks">
+            <div class="card-grid">
+
+                <div class="card" *ngFor="let track of filteredTracks">
+                    <div id="checkiflocal">
+
+                    </div>
+                    <div class="front">
+                        <div class="image" [ngStyle]="{'background-image': 'url(' + track.track.album.images[1].url + ')'}">
+                            <!-- <img *ngIf="track.track.album.images" src="{{track.track.album.images[1].url}}" alt=""> -->
+                        </div>
+                        <div class="info">
+                            <div class="extra_info">
+                                <div class="date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <p>{{track.added_at}}</p>
+                                </div>
+                                <p>Playlist:</p>
+                                <p>{{track.playlist.name}}</p>
                             </div>
-                            <p>Playlist:</p>
-                            <p>{{track.playlist.name}}</p>
-                        </div>
-                        <div class="main">
-                            <h3 class="title">{{track.track.name}}</h3>
-                            <p class="artist">{{track.track.artists[0].name}}</p>
-                            <p class="album">{{track.album.name}}</p>
+                            <div class="main">
+                                <h3 class="title">{{track.track.name}}</h3>
+                                <p class="artist">{{track.track.artists[0].name}}</p>
+                                <p class="album">{{track.album.name}}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+
+                </div>
 
             </div>
 
         </div>
-
     </div>
-</div>
 </div>

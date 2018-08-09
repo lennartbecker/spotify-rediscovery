@@ -6,7 +6,6 @@
 }
 .heading{
   color: white;
-  height: 50vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +18,7 @@ h1{
     height: 100vh;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-around; */
+    justify-content: center;
     align-content: center;
     align-items: center;
 }
@@ -32,8 +31,8 @@ h1{
   align-content: center;
   justify-content: center;
   align-items: center;
-  margin-left: 2%;
-  margin-right: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 #toPicker {
   border-radius: 20px!important;
@@ -64,10 +63,7 @@ mat-datepicker-toggle {
   flex-direction: row; 
   justify-content: space-evenly;
   align-content: center;
-  min-width: 800px;
-  /* max-width: 900px;  */
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px;
   margin-top: 3vh;
   }
 .settingsBox {
@@ -78,13 +74,13 @@ mat-datepicker-toggle {
   background-color: #1db954;
   text-decoration: none;
   display: inline-block;
-  margin: 0 .5% 0 .5%;
+  /* margin: 0 .5% 0 .5%; */
   cursor: pointer;
   font-weight: 700; 
   font-size: 14px;
   line-height: 1;
   border-radius: 500px;
-  padding: 16px 30px 18px;
+  padding: 16px 10px 16px;
   -webkit-transition-property: background-color,border-color,color,-webkit-box-shadow,-webkit-filter;
   transition-property: background-color,border-color,color,-webkit-box-shadow,-webkit-filter;
   transition-property: background-color,border-color,color,box-shadow,filter;
@@ -106,7 +102,7 @@ mat-datepicker-toggle {
   font-size: 14px;
   line-height: 1;
   border-radius: 500px;
-  padding: 16px 30px 18px;
+  padding: 16px 10px 18px;
   transition-property: background-color,border-color,color,box-shadow,-webkit-filter;
   transition-property: background-color,border-color,color,box-shadow,filter;
   transition-property: background-color,border-color,color,box-shadow,filter,-webkit-filter;
@@ -125,14 +121,15 @@ createPlaylistButtonDiv{
   padding-bottom: 1.25em;
 }
 .filterButtonDiv {
-  width: 217px;
+  width: 280px;
   text-align: center;
   text-justify: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 2%;
-  margin-right: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
+
 }
 .filteredTracks{
     width: 100%;
@@ -221,4 +218,37 @@ createPlaylistButtonDiv{
 .album{
   font-size: 15px;
   font-weight: 300;
+}
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.dates {
+  display: flex;
+  flex-direction: row;
+  margin-right: 20px;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+
+}
+@media only screen and (max-width:600px) {
+  .filterSettings {
+    flex-direction: column;
+    align-items: center;
+  }
+  .filterButtonDiv{
+    width: 150px;
+  }
+}
+@media only screen and (max-width:1200px) {
+  .dateInput input {
+    width: 80px;
+  }
+  .filterButtonDiv{
+    width: 150px;
+  }
 }
