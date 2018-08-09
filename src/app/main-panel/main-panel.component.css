@@ -15,9 +15,8 @@ h1{
   color: white; 
 }
 .filterPanel{
-    padding-top: 5vh;
     width: 100%;
-    height: 95vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     /* justify-content: space-around; */
@@ -56,7 +55,7 @@ input::placeholder{
   color: black;
 }
 mat-datepicker-toggle {
-  color: #c8c8c8;
+  color: #7d7d7d;
 }
 .filterSettings{
   background-color: white;

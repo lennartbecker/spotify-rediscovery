@@ -15,7 +15,7 @@ body {
     width:95%;
     margin-left: auto;
     margin-right: auto;
-    height:85vh;
+    height:100vh;
 } 
 .mat-datepicker-content{
     border-radius: 20px!important;
