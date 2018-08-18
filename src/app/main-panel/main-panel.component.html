@@ -29,7 +29,14 @@
                         <a (click)="createPlaylist()" class="createPlaylistButton">Create Playlist</a>
                     </div>
                 </div>
+                <div class="extraSettings">
+                    <mat-form-field>
+                        <mat-select placeholder="Playlists to ignore" multiple [ngModel]="select">
+                            <mat-option *ngFor="let playlist of playlists" [value]="playlist.id">{{playlist.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
+                </div>
             </div>
         </div>
 

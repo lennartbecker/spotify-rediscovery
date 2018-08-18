@@ -27,11 +27,12 @@ export class MainPanelComponent implements OnInit {
     month: null,
     day: null
   };
-  playlists: any[] = [];
+  playlists: any[] = []; // array of playlist names&ids of the current user
   filteredTracks = []
-  filteredTracksUris = [];
+  filteredTracksUris = []; //vielleicht noch entfernen, wird für playlisterstellung genutzt
   showTracks: boolean = false;
   tracks = {};
+  playlistsToIgnore:string[];
   async startLoading() {
     await this.getUserData()
     this.playlists = await this.getPlayLists()
@@ -41,6 +42,7 @@ export class MainPanelComponent implements OnInit {
       let playlist = this.playlists[i]
       await this.getTracks(playlist.tracks.href, playlist.id, playlist.name)
     }
+    console.log(this.playlists)
   }
 
   async getUserData() {
@@ -99,17 +101,21 @@ export class MainPanelComponent implements OnInit {
   filterByDate() {
     this.showTracks = true;
     this.filteredTracks = []
+    console.log(this.tracks,"hallo")
     for (const playlist in this.tracks) {
       this.tracks[playlist].forEach(track => {
         track.album = playlist
         let date = Date.parse(track.added_at)
         let toDate = Date.parse(this.to)
         let fromDate = Date.parse(this.from)
+
         if (date > fromDate && date < toDate) {
+          //if indexof ignoredplaylist !=-1 do not insert
           this.insertTrack(track, date);
         }
       });
     }
+
     console.log(this.filteredTracks)
     this.filteredTracks.sort(function (a, b) {
       return Date.parse(a.added_at) - Date.parse(b.added_at)
@@ -119,12 +125,12 @@ export class MainPanelComponent implements OnInit {
 
   private insertTrack(track: any, date: number) {
     if (!track.is_local) {
-      let index = this.filteredTracks.map((mytrack) => mytrack.track.id).indexOf(track.track.id);
+      let index = this.filteredTracks.map((mytrack) => mytrack.track.id).indexOf(track.track.id); //determine if track already exists in filteredTracks
       if (index == -1) {
         this.filteredTracks.push(track);
       }
       else {
-        let currentTrackAdded = Date.parse(this.filteredTracks[index].added_at);
+        let currentTrackAdded = Date.parse(this.filteredTracks[index].added_at); //if track was added to playlist before the one currently in the filteredTracks Object, add the older one
         if (currentTrackAdded > date) {
           this.filteredTracks[index] = track;
         }
@@ -165,5 +171,8 @@ export class MainPanelComponent implements OnInit {
     this.toObj.day = toDate.getDate()
     this.toObj.year = toDate.getFullYear()
     console.log(this.fromObj,this.toObj)
+  }
+  check(id) {
+    console.log(id)
   }
 }
