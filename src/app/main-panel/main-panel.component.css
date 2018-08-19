@@ -57,15 +57,17 @@ mat-datepicker-toggle {
   color: #7d7d7d;
 }
 .filterSettings{
-  background-color: white;
-  border-radius: 10px;
   display: flex;
   flex-direction: row; 
   justify-content: space-evenly;
   align-content: center;
   padding: 10px;
-  margin-top: 3vh;
   }
+.settingsWrap{
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 3vh;
+}
 .settingsBox {
   /* margin-left: 2%;
   margin-right: 2%; */
@@ -253,6 +255,20 @@ createPlaylistButtonDiv{
     width: 150px;
   }
 }
-.extraSettings {
-  /* display: none; */
+.hidden{
+  display: none;
+}
+.extraSettingsToggle{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin-left: 5px;
+}
+.extraSettingsToggle i {
+  color: #7d7d7d;
+  cursor: pointer;
+}
+.extraSettingsToggle i:hover {
+  color: #707070
 }

@@ -28,6 +28,7 @@ export class MainPanelComponent implements OnInit {
     month: null,
     day: null
   };
+  extraSettings:boolean = false;
   playlistNames: any[] = []; // array of playlist names&ids of the current user
   filteredTracks = []
   filteredTracksUris = []; //vielleicht noch entfernen, wird für playlisterstellung genutzt
@@ -114,7 +115,7 @@ export class MainPanelComponent implements OnInit {
           if (date > fromDate && date < toDate) {
             this.insertTrack(track, date);
           }
-          
+
         });
 
       }
@@ -174,7 +175,8 @@ export class MainPanelComponent implements OnInit {
     this.toObj.year = toDate.getFullYear()
     console.log(this.fromObj, this.toObj)
   }
-  check(id) {
-    console.log(id)
+  toggleExtraSettings() {
+    console.log("click")
+    this.extraSettings = !this.extraSettings;
   }
 }
