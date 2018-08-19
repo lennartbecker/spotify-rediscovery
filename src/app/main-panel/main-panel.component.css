@@ -253,3 +253,6 @@ createPlaylistButtonDiv{
     width: 150px;
   }
 }
+.extraSettings {
+  /* display: none; */
+}

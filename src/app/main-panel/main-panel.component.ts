@@ -15,6 +15,7 @@ export class MainPanelComponent implements OnInit {
     this.startLoading()
   }
   user: string;
+  test;
   to;
   from;
   toObj = {
@@ -27,22 +28,22 @@ export class MainPanelComponent implements OnInit {
     month: null,
     day: null
   };
-  playlists: any[] = []; // array of playlist names&ids of the current user
+  playlistNames: any[] = []; // array of playlist names&ids of the current user
   filteredTracks = []
   filteredTracksUris = []; //vielleicht noch entfernen, wird für playlisterstellung genutzt
   showTracks: boolean = false;
-  tracks = {};
-  playlistsToIgnore:string[];
+  playlists = {};
+  playlistsToIgnore: string[] = [];
   async startLoading() {
     await this.getUserData()
-    this.playlists = await this.getPlayLists()
-    this.playlists = this.filterForUsersPlaylists(this.playlists)
+    this.playlistNames = await this.getPlayLists()
+    this.playlistNames = this.filterForUsersPlaylists(this.playlistNames)
 
-    for (let i = 0; i < this.playlists.length; i++) {
-      let playlist = this.playlists[i]
+    for (let i = 0; i < this.playlistNames.length; i++) {
+      let playlist = this.playlistNames[i]
       await this.getTracks(playlist.tracks.href, playlist.id, playlist.name)
     }
-    console.log(this.playlists)
+    console.log(this.playlistNames)
   }
 
   async getUserData() {
@@ -86,11 +87,11 @@ export class MainPanelComponent implements OnInit {
     }
   }
   private saveToTracksObject(id: any, data: any) {
-    if (this.tracks[id]) {
-      this.tracks[id].push(...data.items);
+    if (this.playlists[id]) {
+      this.playlists[id].push(...data.items);
     }
     else {
-      this.tracks[id] = data.items;
+      this.playlists[id] = data.items;
     }
   }
   getAccessToken() {
@@ -98,25 +99,26 @@ export class MainPanelComponent implements OnInit {
     return token
   }
 
-  filterByDate() {
+  runFilter() {
     this.showTracks = true;
     this.filteredTracks = []
-    console.log(this.tracks,"hallo")
-    for (const playlist in this.tracks) {
-      this.tracks[playlist].forEach(track => {
-        track.album = playlist
-        let date = Date.parse(track.added_at)
-        let toDate = Date.parse(this.to)
-        let fromDate = Date.parse(this.from)
+    for (const playlist in this.playlists) {
 
-        if (date > fromDate && date < toDate) {
-          //if indexof ignoredplaylist !=-1 do not insert
-          this.insertTrack(track, date);
-        }
-      });
+      if (this.playlistsToIgnore.indexOf(playlist) == -1) {
+        this.playlists[playlist].forEach(track => {
+
+          let date = Date.parse(track.added_at)
+          let toDate = Date.parse(this.to)
+          let fromDate = Date.parse(this.from)
+
+          if (date > fromDate && date < toDate) {
+            this.insertTrack(track, date);
+          }
+          
+        });
+
+      }
     }
-
-    console.log(this.filteredTracks)
     this.filteredTracks.sort(function (a, b) {
       return Date.parse(a.added_at) - Date.parse(b.added_at)
     })
@@ -150,12 +152,12 @@ export class MainPanelComponent implements OnInit {
     let playlist = await this.spotify.createPlaylist(name, "Created with Rediscovery", this.user, token)
     this.addTracksToPlaylist(playlist['id'])
   }
-  async addTracksToPlaylist(id){
+  async addTracksToPlaylist(id) {
     this.filteredTracksUris = []
     for (let i = 0; i < this.filteredTracks.length; i++) {
-      this.filteredTracksUris.push("spotify:track:"+this.filteredTracks[i].track.id)
+      this.filteredTracksUris.push("spotify:track:" + this.filteredTracks[i].track.id)
     }
-    await this.spotify.insertTracks(this.user,id,this.filteredTracksUris,this.getAccessToken())
+    await this.spotify.insertTracks(this.user, id, this.filteredTracksUris, this.getAccessToken())
   }
 
   getDateSpan() {
@@ -170,7 +172,7 @@ export class MainPanelComponent implements OnInit {
     this.toObj.month = toDate.toLocaleString(locale, { month: "long" })
     this.toObj.day = toDate.getDate()
     this.toObj.year = toDate.getFullYear()
-    console.log(this.fromObj,this.toObj)
+    console.log(this.fromObj, this.toObj)
   }
   check(id) {
     console.log(id)
