@@ -172,7 +172,7 @@ createPlaylistButtonDiv{
   background-size:  cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 75%;
+  height: 100%;
   border-radius: 10px 10px 0 0;
 }
 .image img {
@@ -206,6 +206,7 @@ createPlaylistButtonDiv{
   height: 0;
   overflow: hidden;
   transition: height .3s ease;
+  /* display: none; */
 }
 .extra_info p {
   font-size: 15 px;
