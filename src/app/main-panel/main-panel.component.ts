@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,NgModule, ViewChild} from '@angular/core';
 import { AuthorizeService } from '../authorize.service';
 import { SpotifyService } from '../spotify.service';
-
+import {BrowserModule} from '@angular/platform-browser';
 @Component({
   selector: 'app-main-panel',
   templateUrl: './main-panel.component.html',
@@ -44,7 +44,6 @@ export class MainPanelComponent implements OnInit {
       let playlist = this.playlistNames[i]
       await this.getTracks(playlist.tracks.href, playlist.id, playlist.name)
     }
-    console.log(this.playlistNames)
   }
 
   async getUserData() {
@@ -103,6 +102,7 @@ export class MainPanelComponent implements OnInit {
   runFilter() {
     this.showTracks = true;
     this.filteredTracks = []
+    if(this.playlists)
     for (const playlist in this.playlists) {
 
       if (this.playlistsToIgnore.indexOf(playlist) == -1) {

@@ -1,9 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@ng-select/ng-select/themes/custom.theme.css";
 body {
     background: linear-gradient(to right, #8E54E9 , #4776E6);
     color: white;
 }
+.mat-select-panel {
+    border-radius: 20px;
+  }
+  .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate{
+      background: #4776E6;
+  }
 *{
     margin: 0px;
     font-family: 'Open Sans', sans-serif;

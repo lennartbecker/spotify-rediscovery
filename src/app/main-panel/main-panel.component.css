@@ -4,11 +4,20 @@
 *{
     color:black;
 }
+.mat-select {
+  border: 1px solid #c8c8c8;
+  border-radius: 20px;
+  padding: 10px;
+}
 .heading{
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.ignorePlaylist{
+  display: flex;
+  flex-direction: row;
 }
 h1{
   color: white; 
@@ -257,6 +266,11 @@ createPlaylistButtonDiv{
 }
 .hidden{
   display: none;
+}
+.extraSettings {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
 }
 .extraSettingsToggle{
   display: flex;
