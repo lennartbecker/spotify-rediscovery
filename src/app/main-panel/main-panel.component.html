@@ -25,9 +25,11 @@
                     <div class="buttons">
                         <div class="filterButtonDiv">
                             <div class="loading" *ngIf="showSpinner"></div>
-                            <a (click)="runFilter()" class="filterButton" >Get Tracks</a>
+                            <a *ngIf="showSpinner" class="filterButton disabled"></a>
+                            <a (click)="runFilter()" class="filterButton" *ngIf="!showSpinner">Get Tracks</a>
                         </div>
                         <div class="filterButtonDiv" *ngIf="showTracks">
+                            
                             <a (click)="createPlaylist()" class="createPlaylistButton">Create Playlist</a>
                         </div>
                     </div>
@@ -38,7 +40,7 @@
                 </div>
                 <div class="extraSettings" *ngIf="extraSettings">
                     <div class="ignorePlaylist">
-                        <mat-select placeholder="Playlists to ignore" multiple [(ngModel)]="playlistsToIgnore">
+                        <mat-select placeholder="Playlists to exclude" multiple [(ngModel)]="playlistsToIgnore">
                             <mat-option *ngFor="let playlist of playlistNames" [value]="playlist.id">{{playlist.name}}</mat-option>
                         </mat-select>
                     </div>
