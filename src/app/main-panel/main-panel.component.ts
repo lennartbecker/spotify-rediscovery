@@ -35,7 +35,9 @@ export class MainPanelComponent implements OnInit {
   showTracks: boolean = false;
   playlists = {};
   playlistsToIgnore: string[] = [];
+  showSpinner:boolean = true;
   async startLoading() {
+
     await this.getUserData()
     this.playlistNames = await this.getPlayLists()
     this.playlistNames = this.filterForUsersPlaylists(this.playlistNames)
@@ -44,6 +46,7 @@ export class MainPanelComponent implements OnInit {
       let playlist = this.playlistNames[i]
       await this.getTracks(playlist.tracks.href, playlist.id, playlist.name)
     }
+    this.showSpinner = false;
   }
 
   async getUserData() {

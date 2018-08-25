@@ -140,7 +140,7 @@ createPlaylistButtonDiv{
   justify-content: center;
   margin-left: 1%;
   margin-right: 1%;
-
+  position: relative;
 }
 .filteredTracks{
     width: 100%;
@@ -221,9 +221,6 @@ createPlaylistButtonDiv{
   flex-direction: column;
   justify-content: space-between;
 }
-.title{
-
-}
 .artist{
   font-size: 15px;
 }
@@ -286,4 +283,23 @@ createPlaylistButtonDiv{
 }
 .extraSettingsToggle i:hover {
   color: #707070
+}
+.loading {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border: .25rem solid rgb(255, 255, 255,0);
+  border-top-color: white;
+  animation: spin 1s infinite linear;
+  position: absolute;
+  align-self: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
