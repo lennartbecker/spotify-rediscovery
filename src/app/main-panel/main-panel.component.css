@@ -150,15 +150,16 @@ createPlaylistButtonDiv{
 }
 .card-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     padding: 1rem;
     grid-gap: 1rem;
 }
 .card{
-  max-width: 300px;  
-  min-width: 250px;
+  width: 300px;
   border-radius: 20px;
   min-height: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .front {
   background-color: white;
