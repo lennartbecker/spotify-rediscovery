@@ -256,7 +256,19 @@ createPlaylistButtonDiv{
   .filterButtonDiv{
     width: 150px;
   }
-  
+
+@media only screen and (max-width:1000px) {
+  *{
+    background-color: red;
+  }
+  .card-grid{
+    grid-template-columns: repeat(auto-fit, minmax(227px, 1fr));
+}
+.card{
+  width: 227px;
+  min-height: 300px;
+}
+}
 }
 @media only screen and (max-width:1200px) {
   .dateInput input {
