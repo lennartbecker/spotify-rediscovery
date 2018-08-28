@@ -8,7 +8,6 @@ import { AppRoutingModule } from './/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthorizeComponent } from './authorize/authorize.component';
 import { FormsModule } from '@angular/forms';
-import { NgSelectModule } from '@ng-select/ng-select';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {  MatNativeDateModule} from '@angular/material'
@@ -26,7 +25,6 @@ import {ReactiveFormsModule} from '@angular/forms';
     AuthorizeComponent
   ],
   imports: [
-    NgSelectModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
