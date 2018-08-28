@@ -1,7 +1,7 @@
-import { Component, OnInit ,NgModule, ViewChild} from '@angular/core';
+import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
 import { AuthorizeService } from '../authorize.service';
 import { SpotifyService } from '../spotify.service';
-import {BrowserModule} from '@angular/platform-browser';
+import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-main-panel',
   templateUrl: './main-panel.component.html',
@@ -9,12 +9,13 @@ import {BrowserModule} from '@angular/platform-browser';
 })
 export class MainPanelComponent implements OnInit {
 
-  constructor(private auth: AuthorizeService, private spotify: SpotifyService) { }
+  constructor(private auth: AuthorizeService, private spotify: SpotifyService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.startLoading()
   }
   user: string;
+  userLanguage;
   test;
   to;
   from;
@@ -28,16 +29,16 @@ export class MainPanelComponent implements OnInit {
     month: null,
     day: null
   };
-  extraSettings:boolean = false;
+  extraSettings: boolean = false;
   playlistNames: any[] = []; // array of playlist names&ids of the current user
   filteredTracks = []
   filteredTracksUris = []; //vielleicht noch entfernen, wird für playlisterstellung genutzt
   showTracks: boolean = false;
   playlists = {};
   playlistsToIgnore: string[] = [];
-  showSpinner:boolean = true;
+  showSpinner: boolean = true;
   async startLoading() {
-
+    this.userLanguage = navigator.language;
     await this.getUserData()
     this.playlistNames = await this.getPlayLists()
     this.playlistNames = this.filterForUsersPlaylists(this.playlistNames)
@@ -105,24 +106,24 @@ export class MainPanelComponent implements OnInit {
   runFilter() {
     this.showTracks = true;
     this.filteredTracks = []
-    if(this.playlists)
-    for (const playlist in this.playlists) {
+    if (this.playlists)
+      for (const playlist in this.playlists) {
 
-      if (this.playlistsToIgnore.indexOf(playlist) == -1) {
-        this.playlists[playlist].forEach(track => {
+        if (this.playlistsToIgnore.indexOf(playlist) == -1) {
+          this.playlists[playlist].forEach(track => {
 
-          let date = Date.parse(track.added_at)
-          let toDate = Date.parse(this.to)
-          let fromDate = Date.parse(this.from)
+            let date = Date.parse(track.added_at)
+            let toDate = Date.parse(this.to)
+            let fromDate = Date.parse(this.from)
 
-          if (date > fromDate && date < toDate) {
-            this.insertTrack(track, date);
-          }
+            if (date > fromDate && date < toDate) {
+              this.insertTrack(track, date);
+            }
 
-        });
+          });
 
+        }
       }
-    }
     this.filteredTracks.sort(function (a, b) {
       return Date.parse(a.added_at) - Date.parse(b.added_at)
     })
@@ -147,14 +148,17 @@ export class MainPanelComponent implements OnInit {
     let token = this.getAccessToken()
     this.getDateSpan()
     let name;
-    if (this.fromObj.year == this.toObj.year) {
-      name = `${this.fromObj.month} ${this.fromObj.day} - ${this.toObj.month} ${this.toObj.day} ${this.toObj.year}`
+    if (this.to != '' || this.from != '')  {
+      if (this.fromObj.year == this.toObj.year) {
+        name = `${this.fromObj.month} ${this.fromObj.day} - ${this.toObj.month} ${this.toObj.day} ${this.toObj.year}`
+      } else {
+        name = `${this.fromObj.day} ${this.fromObj.month} ${this.fromObj.year} -  ${this.toObj.day} ${this.toObj.month} ${this.toObj.year}`
+      }
+      let playlist = await this.spotify.createPlaylist(name, "Created with Rediscovery", this.user, token)
+      this.addTracksToPlaylist(playlist['id'])
     } else {
-      name = `${this.fromObj.day} ${this.fromObj.month} ${this.fromObj.year} -  ${this.toObj.day} ${this.toObj.month} ${this.toObj.year}`
+      console.log('no timeframe specified')
     }
-    console.log(name)
-    let playlist = await this.spotify.createPlaylist(name, "Created with Rediscovery", this.user, token)
-    this.addTracksToPlaylist(playlist['id'])
   }
   async addTracksToPlaylist(id) {
     this.filteredTracksUris = []
@@ -162,6 +166,7 @@ export class MainPanelComponent implements OnInit {
       this.filteredTracksUris.push("spotify:track:" + this.filteredTracks[i].track.id)
     }
     await this.spotify.insertTracks(this.user, id, this.filteredTracksUris, this.getAccessToken())
+    this.snackBar.open('Playlist creation successfull');
   }
 
   getDateSpan() {
@@ -176,7 +181,6 @@ export class MainPanelComponent implements OnInit {
     this.toObj.month = toDate.toLocaleString(locale, { month: "long" })
     this.toObj.day = toDate.getDate()
     this.toObj.year = toDate.getFullYear()
-    console.log(this.fromObj, this.toObj)
   }
   toggleExtraSettings() {
     console.log("click")

@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthorizeComponent } from './authorize/authorize.component';
 import { FormsModule } from '@angular/forms';
 
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MomentModule } from 'ngx-moment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {  MatNativeDateModule} from '@angular/material'
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -35,7 +37,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatFormFieldModule,
     MatDatepickerModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MomentModule,
+    MatSnackBarModule
   ],
   providers: [MatNativeDateModule],
   bootstrap: [AppComponent]
