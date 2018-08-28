@@ -104,29 +104,35 @@ export class MainPanelComponent implements OnInit {
   }
 
   runFilter() {
-    this.showTracks = true;
-    this.filteredTracks = []
-    if (this.playlists)
-      for (const playlist in this.playlists) {
+    if (this.to == '' || !this.to || this.from == '' || !this.from) {
+      this.snackBar.open("Please select a timeframe!")
+    } else {
 
-        if (this.playlistsToIgnore.indexOf(playlist) == -1) {
-          this.playlists[playlist].forEach(track => {
+      console.log(!this.to)
+      this.showTracks = true;
+      this.filteredTracks = []
+      if (this.playlists)
+        for (const playlist in this.playlists) {
 
-            let date = Date.parse(track.added_at)
-            let toDate = Date.parse(this.to)
-            let fromDate = Date.parse(this.from)
+          if (this.playlistsToIgnore.indexOf(playlist) == -1) {
+            this.playlists[playlist].forEach(track => {
 
-            if (date > fromDate && date < toDate) {
-              this.insertTrack(track, date);
-            }
+              let date = Date.parse(track.added_at)
+              let toDate = Date.parse(this.to)
+              let fromDate = Date.parse(this.from)
 
-          });
+              if (date > fromDate && date < toDate) {
+                this.insertTrack(track, date);
+              }
 
+            });
+
+          }
         }
-      }
-    this.filteredTracks.sort(function (a, b) {
-      return Date.parse(a.added_at) - Date.parse(b.added_at)
-    })
+      this.filteredTracks.sort(function (a, b) {
+        return Date.parse(a.added_at) - Date.parse(b.added_at)
+      })
+    }
   }
 
 
@@ -148,7 +154,7 @@ export class MainPanelComponent implements OnInit {
     let token = this.getAccessToken()
     this.getDateSpan()
     let name;
-    if (this.to != '' || this.from != '')  {
+    if (this.to != '' || this.from != '') {
       if (this.fromObj.year == this.toObj.year) {
         name = `${this.fromObj.month} ${this.fromObj.day} - ${this.toObj.month} ${this.toObj.day} ${this.toObj.year}`
       } else {
