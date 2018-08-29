@@ -157,7 +157,7 @@ createPlaylistButtonDiv{
 .card{
   width: 300px;
   border-radius: 20px;
-  min-height: 400px;
+  height: 400px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -217,7 +217,7 @@ createPlaylistButtonDiv{
   font-style: normal;
 }
 .card:hover .extra_info{
-  height: 70px;
+  height: 90px;
 }
 .main{
   display: flex;
