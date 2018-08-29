@@ -187,9 +187,9 @@ createPlaylistButtonDiv{
   background-color: white;
   border-radius: 0 0 10px 10px;
   padding: 5%;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; */
   position: relative;
   z-index: 2
   /* box-shadow: 0px -7px 6px #1c1c1cb3; */
@@ -217,7 +217,7 @@ createPlaylistButtonDiv{
   font-style: normal;
 }
 .card:hover .extra_info{
-  height: 90px;
+  height: 70px;
 }
 .main{
   display: flex;
