@@ -20,4 +20,5 @@ export class AuthorizeService {
     localStorage.setItem('sr_accesstoken',token)
     this.accesstoken = token;
   }
+  
 }
