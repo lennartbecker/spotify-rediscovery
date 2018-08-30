@@ -104,31 +104,38 @@ export class MainPanelComponent implements OnInit {
   }
 
   runFilter() {
+    if (Date.parse(this.to) < Date.parse(this.from)) {
+
+    }
     if (this.to == '' || !this.to || this.from == '' || !this.from) {
       this.snackBar.open("Please select a timeframe!")
     } else {
 
-      console.log(!this.to)
+      if (Date.parse(this.to) < Date.parse(this.from)) {
+        let placeholder = this.from;
+        this.from = this.to;
+        this.to = placeholder;
+      }
+      
       this.showTracks = true;
       this.filteredTracks = []
-      if (this.playlists)
-        for (const playlist in this.playlists) {
+      let toDate = Date.parse(this.to)
+      let fromDate = Date.parse(this.from)
+      for (const playlist in this.playlists) {
 
-          if (this.playlistsToIgnore.indexOf(playlist) == -1) {
-            this.playlists[playlist].forEach(track => {
+        if (this.playlistsToIgnore.indexOf(playlist) == -1) {
+          this.playlists[playlist].forEach(track => {
 
-              let date = Date.parse(track.added_at)
-              let toDate = Date.parse(this.to)
-              let fromDate = Date.parse(this.from)
+            let date = Date.parse(track.added_at)
 
-              if (date > fromDate && date < toDate) {
-                this.insertTrack(track, date);
-              }
+            if (date > fromDate && date < toDate) {
+              this.insertTrack(track, date);
+            }
 
-            });
+          });
 
-          }
         }
+      }
       this.filteredTracks.sort(function (a, b) {
         return Date.parse(a.added_at) - Date.parse(b.added_at)
       })
