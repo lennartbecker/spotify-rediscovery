@@ -146,7 +146,7 @@ createPlaylistButtonDiv{
 }
 .filteredTracks{
     width: 100%;
-    min-height: 78vh;
+    height: 78vh;
 }
 .card-grid{
     display: grid;

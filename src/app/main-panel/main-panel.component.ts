@@ -52,18 +52,15 @@ export class MainPanelComponent implements OnInit {
   }
 
   async getUserData() {
-    try {
-      let token = this.getAccessToken()
+    // try {
       let userdata: any = await this.spotify.getUserData()
       this.user = userdata.id;
-    } catch {
-      console.log("Error ")
-
-    }
+    // } catch {
+      // console.log("error")
+    // }
   }
 
   async getPlayLists(offset = 0, limit = 20, prevPlaylists = []) { //Get all playlists from current user
-    let token = this.getAccessToken();
     let playlist: any = await this.spotify.getPlaylists(offset, limit)
     prevPlaylists.push(...playlist.items)
     if (playlist.next) {
@@ -85,7 +82,6 @@ export class MainPanelComponent implements OnInit {
   }
 
   async getTracks(url, id, name) {
-    let token = this.getAccessToken()
     let data: any = await this.spotify.getTracks(url)
     data.items.forEach(track => {
       track.playlist = { id, name }
@@ -104,11 +100,6 @@ export class MainPanelComponent implements OnInit {
       this.playlists[id] = data.items;
     }
   }
-  getAccessToken() {
-    let token = this.auth.getAccessToken()
-    return token
-  }
-
   runFilter() {
     if (Date.parse(this.to) < Date.parse(this.from)) {
 
@@ -164,7 +155,6 @@ export class MainPanelComponent implements OnInit {
     }
   }
   async createPlaylist() {
-    let token = this.getAccessToken()
     this.getDateSpan()
     let name;
     if (this.to != '' || this.from != '') {
