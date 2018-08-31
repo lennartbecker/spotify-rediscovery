@@ -8,12 +8,6 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./main-panel.component.css']
 })
 export class MainPanelComponent implements OnInit {
-
-  constructor(private auth: AuthorizeService, private spotify: SpotifyService, public snackBar: MatSnackBar) { }
-
-  ngOnInit() {
-    this.startLoading()
-  }
   user: string;
   userLanguage;
   test;
@@ -37,11 +31,18 @@ export class MainPanelComponent implements OnInit {
   playlists = {};
   playlistsToIgnore: string[] = [];
   showSpinner: boolean = true;
+
+  constructor(private auth: AuthorizeService, private spotify: SpotifyService, public snackBar: MatSnackBar) { }
+
+  ngOnInit() {
+    this.startLoading()
+  }
+
   async startLoading() {
-    this.userLanguage = navigator.language;
     await this.getUserData()
+
     this.playlistNames = await this.getPlayLists()
-    this.playlistNames = this.filterForUsersPlaylists(this.playlistNames)
+    this.playlistNames = this.filterForUsersPlaylists(this.playlistNames) //Filter Out playlists that the user follows
 
     for (let i = 0; i < this.playlistNames.length; i++) {
       let playlist = this.playlistNames[i]
@@ -51,14 +52,19 @@ export class MainPanelComponent implements OnInit {
   }
 
   async getUserData() {
-    let token = this.getAccessToken()
-    let userdata: any = await this.spotify.getUserData(token)
-    this.user = userdata.id;
+    try {
+      let token = this.getAccessToken()
+      let userdata: any = await this.spotify.getUserData()
+      this.user = userdata.id;
+    } catch {
+      console.log("Error ")
+
+    }
   }
 
   async getPlayLists(offset = 0, limit = 20, prevPlaylists = []) { //Get all playlists from current user
     let token = this.getAccessToken();
-    let playlist: any = await this.spotify.getPlaylists(token, offset, limit)
+    let playlist: any = await this.spotify.getPlaylists(offset, limit)
     prevPlaylists.push(...playlist.items)
     if (playlist.next) {
       offset = +20
@@ -80,7 +86,7 @@ export class MainPanelComponent implements OnInit {
 
   async getTracks(url, id, name) {
     let token = this.getAccessToken()
-    let data: any = await this.spotify.getTracks(url, token)
+    let data: any = await this.spotify.getTracks(url)
     data.items.forEach(track => {
       track.playlist = { id, name }
     });
@@ -116,7 +122,7 @@ export class MainPanelComponent implements OnInit {
         this.from = this.to;
         this.to = placeholder;
       }
-      
+
       this.showTracks = true;
       this.filteredTracks = []
       let toDate = Date.parse(this.to)
@@ -167,7 +173,7 @@ export class MainPanelComponent implements OnInit {
       } else {
         name = `${this.fromObj.day} ${this.fromObj.month} ${this.fromObj.year} -  ${this.toObj.day} ${this.toObj.month} ${this.toObj.year}`
       }
-      let playlist = await this.spotify.createPlaylist(name, "Created with Rediscovery", this.user, token)
+      let playlist = await this.spotify.createPlaylist(name, "Created with Rediscovery", this.user)
       this.addTracksToPlaylist(playlist['id'])
     } else {
       console.log('no timeframe specified')
@@ -178,7 +184,7 @@ export class MainPanelComponent implements OnInit {
     for (let i = 0; i < this.filteredTracks.length; i++) {
       this.filteredTracksUris.push("spotify:track:" + this.filteredTracks[i].track.id)
     }
-    await this.spotify.insertTracks(this.user, id, this.filteredTracksUris, this.getAccessToken())
+    await this.spotify.insertTracks(this.user, id, this.filteredTracksUris)
     this.snackBar.open('Playlist creation successfull');
   }
 
