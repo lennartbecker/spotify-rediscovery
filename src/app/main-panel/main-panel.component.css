@@ -18,6 +18,7 @@
 .ignorePlaylist{
   display: flex;
   flex-direction: row;
+  max-width: 600px;
 }
 h1{
   color: white; 
@@ -285,6 +286,9 @@ createPlaylistButtonDiv{
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .extraSettingsToggle{
   display: flex;
