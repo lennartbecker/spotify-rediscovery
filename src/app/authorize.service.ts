@@ -11,13 +11,13 @@ export class AuthorizeService {
   constructor(private http: HttpClient) {
   }
   getAccessToken() {
-    if(localStorage.getItem('sr_accesstoken')){
-      this.accesstoken = localStorage.getItem('sr_accesstoken')
+    if(sessionStorage.getItem('sr_accesstoken')){
+      this.accesstoken = sessionStorage.getItem('sr_accesstoken')
     }
     return this.accesstoken
   }
   setAccessToken(token) {
-    localStorage.setItem('sr_accesstoken',token)
+    sessionStorage.setItem('sr_accesstoken',token)
     this.accesstoken = token;
   }
   

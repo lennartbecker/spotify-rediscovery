@@ -289,6 +289,7 @@ createPlaylistButtonDiv{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 .extraSettingsToggle{
   display: flex;
@@ -325,4 +326,9 @@ createPlaylistButtonDiv{
 }
 .disabled {
   background-color: grey;
+}
+.noTracksFound {
+  position: absolute;
+  bottom: 25vh;
+  color: white;
 }

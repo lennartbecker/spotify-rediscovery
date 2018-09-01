@@ -8,11 +8,16 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./main-panel.component.css']
 })
 export class MainPanelComponent implements OnInit {
+
   user: string;
-  userLanguage;
-  test;
-  to;
-  from;
+  to:string;
+  from:string;
+
+  extraSettings: boolean = false;
+  showTracks: boolean = false;
+  showNoTracksMessage:boolean = false;
+  showSpinner: boolean = true;
+
   toObj = {
     year: null,
     month: null,
@@ -23,14 +28,12 @@ export class MainPanelComponent implements OnInit {
     month: null,
     day: null
   };
-  extraSettings: boolean = false;
+  playlists = {};
+
   playlistNames: any[] = []; // array of playlist names&ids of the current user
   filteredTracks = []
   filteredTracksUris = []; //vielleicht noch entfernen, wird für playlisterstellung genutzt
-  showTracks: boolean = false;
-  playlists = {};
   playlistsToIgnore: string[] = [];
-  showSpinner: boolean = true;
 
   constructor(private auth: AuthorizeService, private spotify: SpotifyService, public snackBar: MatSnackBar) { }
 
@@ -52,12 +55,8 @@ export class MainPanelComponent implements OnInit {
   }
 
   async getUserData() {
-    // try {
       let userdata: any = await this.spotify.getUserData()
       this.user = userdata.id;
-    // } catch {
-      // console.log("error")
-    // }
   }
 
   async getPlayLists(offset = 0, limit = 20, prevPlaylists = []) { //Get all playlists from current user
@@ -101,11 +100,10 @@ export class MainPanelComponent implements OnInit {
     }
   }
   runFilter() {
-    if (Date.parse(this.to) < Date.parse(this.from)) {
-
-    }
     if (this.to == '' || !this.to || this.from == '' || !this.from) {
-      this.snackBar.open("Please select a timeframe!")
+      this.snackBar.open("Please select a timeframe!",'',{
+        duration:3000
+      })
     } else {
 
       if (Date.parse(this.to) < Date.parse(this.from)) {
@@ -114,7 +112,6 @@ export class MainPanelComponent implements OnInit {
         this.to = placeholder;
       }
 
-      this.showTracks = true;
       this.filteredTracks = []
       let toDate = Date.parse(this.to)
       let fromDate = Date.parse(this.from)
@@ -136,6 +133,11 @@ export class MainPanelComponent implements OnInit {
       this.filteredTracks.sort(function (a, b) {
         return Date.parse(a.added_at) - Date.parse(b.added_at)
       })
+      if (this.filteredTracks.length == 0) {
+        this.showNoTracksMessage = true;
+      } else {
+        this.showTracks = true;
+      }
     }
   }
 
@@ -175,7 +177,9 @@ export class MainPanelComponent implements OnInit {
       this.filteredTracksUris.push("spotify:track:" + this.filteredTracks[i].track.id)
     }
     await this.spotify.insertTracks(this.user, id, this.filteredTracksUris)
-    this.snackBar.open('Playlist creation successfull');
+    this.snackBar.open('Playlist creation successfull','Hello', {
+      duration: 3000
+    });
   }
 
   getDateSpan() {
