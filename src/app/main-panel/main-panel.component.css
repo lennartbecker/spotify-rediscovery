@@ -8,6 +8,7 @@
   border: 1px solid #c8c8c8;
   border-radius: 20px;
   padding: 10px;
+  min-width: 200px;
 }
 .heading{
   color: white;
