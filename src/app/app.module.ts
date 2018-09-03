@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthorizeComponent } from './authorize/authorize.component';
 import { FormsModule } from '@angular/forms';
 
+
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MomentModule } from 'ngx-moment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -17,6 +18,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {NgxPageScrollModule} from 'ngx-page-scroll';
 
 import {ReactiveFormsModule} from '@angular/forms';
 @NgModule({
@@ -39,7 +41,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     MomentModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgxPageScrollModule
   ],
   providers: [MatNativeDateModule],
   bootstrap: [AppComponent]
