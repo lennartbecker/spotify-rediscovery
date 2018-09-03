@@ -250,7 +250,7 @@ createPlaylistButtonDiv{
   flex-direction: row;
 
 }
-@media only screen and (max-width:600px) {
+@media only screen and (max-width:670px) {
   .filterSettings {
     flex-direction: column;
     align-items: center;
@@ -258,19 +258,23 @@ createPlaylistButtonDiv{
   .filterButtonDiv{
     width: 150px;
   }
-
-@media only screen and (max-width:1000px) {
-  *{
-    background-color: red;
+  .dates {
+    padding-bottom: 10px;
   }
-  .card-grid{
-    grid-template-columns: repeat(auto-fit, minmax(227px, 1fr));
-}
-.card{
-  width: 227px;
-  min-height: 300px;
-}
-}
+  .buttons {
+    padding-bottom: 10px;
+  }
+  .settingsWrap {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  .card {
+    width: 250px;
+    height: 300px;
+  }
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
 }
 @media only screen and (max-width:1200px) {
   .dateInput input {

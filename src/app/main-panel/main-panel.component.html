@@ -29,7 +29,7 @@
                             <a (click)="runFilter()" class="filterButton" *ngIf="!showSpinner">Get Tracks</a>
                         </div>
                         <div class="filterButtonDiv" *ngIf="showTracks">
-                            
+
                             <a (click)="createPlaylist()" class="createPlaylistButton">Create Playlist</a>
                         </div>
                     </div>
@@ -62,7 +62,9 @@
                                     <p>{{track.added_at| amDateFormat:'MMMM Do YYYY'}}</p>
                                 </div>
                                 <p>Playlist:</p>
-                                <p><b>{{track.playlist.name}}</b></p>
+                                <p>
+                                    <b>{{track.playlist.name}}</b>
+                                </p>
                             </div>
                             <div class="main">
                                 <h3 class="title">{{track.track.name}}</h3>
@@ -79,8 +81,7 @@
 
         </div>
         <div class="noTracksFound" *ngIf="showNoTracksMessage">
-            <h1>Sorry, you added no tracks during that time.
-                Maybe try a different one?
+            <h1>Sorry, you added no tracks during that time. Maybe try a different one?
             </h1>
         </div>
     </div>
