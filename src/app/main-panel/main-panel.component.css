@@ -265,7 +265,7 @@ createPlaylistButtonDiv{
     padding-bottom: 10px;
   }
   .settingsWrap {
-    margin-top: 40px;
+    margin-top: 115px;
     margin-bottom: 40px;
   }
   .card {
@@ -333,7 +333,8 @@ createPlaylistButtonDiv{
   background-color: grey;
 }
 .noTracksFound {
-  position: absolute;
-  bottom: 25vh;
   color: white;
+}
+.mat-snack-bar-container {
+  margin-bottom: 20px!important;
 }

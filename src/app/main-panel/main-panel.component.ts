@@ -15,7 +15,6 @@ export class MainPanelComponent implements OnInit {
 
   extraSettings: boolean = false;
   showTracks: boolean = false;
-  showNoTracksMessage:boolean = false;
   showSpinner: boolean = true;
 
   toObj = {
@@ -134,7 +133,11 @@ export class MainPanelComponent implements OnInit {
         return Date.parse(a.added_at) - Date.parse(b.added_at)
       })
       if (this.filteredTracks.length == 0) {
-        this.showNoTracksMessage = true;
+        this.showTracks = false;
+        this.snackBar.open('Sorry, you added no tracks during that time. Maybe try a different one?','',{
+          duration:3000
+        })
+
       } else {
         this.showTracks = true;
       }

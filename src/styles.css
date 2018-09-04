@@ -43,7 +43,9 @@ body {
     display: flex!important;
     flex-direction: row;
     justify-content: center;
+
 }
 .mat-simple-snackbar {
     font-size: 16px!important;
+
 }
