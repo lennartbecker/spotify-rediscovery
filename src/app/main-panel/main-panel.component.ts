@@ -10,8 +10,8 @@ import { MatSnackBar } from '@angular/material';
 export class MainPanelComponent implements OnInit {
 
   user: string; //User Id
-  to:string; //NgModel for dateinput, used to specify the timeframe
-  from:string;//NgModel for dateinput, used to specify the timeframe
+  to: string; //NgModel for dateinput, used to specify the timeframe
+  from: string;//NgModel for dateinput, used to specify the timeframe
 
   extraSettings: boolean = false; //Show or hide extraSettings panel (exclude Playlists)
   showTracks: boolean = false; //Show or hide tracks depending on the status of the search
@@ -55,8 +55,8 @@ export class MainPanelComponent implements OnInit {
   }
 
   async getUserData() {
-      let userdata: any = await this.spotify.getUserData()
-      this.user = userdata.id;
+    let userdata: any = await this.spotify.getUserData()
+    this.user = userdata.id;
   }
 
   async getPlayLists(offset = 0, limit = 20, prevPlaylists = []) { //Get all playlists from current user
@@ -101,8 +101,8 @@ export class MainPanelComponent implements OnInit {
   }
   runFilter() {
     if (this.to == '' || !this.to || this.from == '' || !this.from) {
-      this.snackBar.open("Please select a timeframe!",'',{
-        duration:3000
+      this.snackBar.open("Please select a timeframe!", '', {
+        duration: 3000
       })
     } else {
 
@@ -133,8 +133,8 @@ export class MainPanelComponent implements OnInit {
       })
       if (this.filteredTracks.length == 0) {
         this.showTracks = false;
-        this.snackBar.open('Sorry, you added no tracks during that time. Maybe try a different one?','',{
-          duration:3000
+        this.snackBar.open('Sorry, you added no tracks during that time. Maybe try a different one?', '', {
+          duration: 3000
         })
 
       } else {
@@ -180,8 +180,17 @@ export class MainPanelComponent implements OnInit {
     for (let i = 0; i < this.filteredTracks.length; i++) {
       this.filteredTracksUris.push("spotify:track:" + this.filteredTracks[i].track.id)
     }
-    await this.spotify.insertTracks(this.user, id, this.filteredTracksUris)
-    this.snackBar.open('Playlist creation successfull','Hello', {
+    if (this.filteredTracksUris.length >= 100) {
+      console.log(this.filteredTracksUris)
+      while (this.filteredTracksUris.length != 0) {
+        let partOfTracks = this.filteredTracksUris.slice(0, 99);
+        this.filteredTracksUris = this.filteredTracksUris.slice(99, this.filteredTracksUris.length);
+        await this.spotify.insertTracks(this.user, id, partOfTracks)
+
+      }
+    }
+    // await this.spotify.insertTracks(this.user, id, this.filteredTracksUris)
+    this.snackBar.open('Playlist creation successfull', 'Gotcha!', {
       duration: 3000
     });
   }

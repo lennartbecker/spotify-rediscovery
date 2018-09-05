@@ -7,7 +7,7 @@ import { AuthorizeComponent } from './authorize/authorize.component';
 import {AuthGuardService as AuthGuard} from './auth-guard.service'
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'main', component: MainPanelComponent,canActivate: [AuthGuard]},
+  {path: 'rediscover', component: MainPanelComponent,canActivate: [AuthGuard]},
   {path: 'callback', component: AuthorizeComponent},
   {path: '', component: LoginComponent}
 
