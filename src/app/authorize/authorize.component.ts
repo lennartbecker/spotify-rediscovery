@@ -13,6 +13,7 @@ export class AuthorizeComponent implements OnInit {
     private router: Router,
     private auth: AuthorizeService) { }
 
+  // This component is just responsible for extracting the API Key from the redirect by the Spotify API
   ngOnInit() {
     let urlParams = this.route.snapshot.fragment.split("&");
     this.auth.setAccessToken(urlParams[0].split("=")[1])

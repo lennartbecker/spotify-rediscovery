@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SpotifyService {
+  // Responsible for all Calls to the Spotify API
+
   token: string;
   constructor(private http: HttpClient, private auth: AuthorizeService, public router: Router) {
   }
@@ -18,20 +20,21 @@ export class SpotifyService {
     const token = this.getAccesstoken();
     return this.http.get('https://api.spotify.com/v1/me', { headers: { Authorization: 'Bearer ' + token } }).toPromise()
       .catch(() => this.router.navigate(['']))
-
   }
+
   getPlaylists(offset, limit) {
     const token = this.getAccesstoken();
     return this.http.get('https://api.spotify.com/v1/me/playlists?offset=' + offset + '&limit=' + limit, { headers: { Authorization: 'Bearer ' + token } }).toPromise()
       .catch(() => this.router.navigate(['']))
   }
+
   getTracks(url, offset = 0) {
     const token = this.getAccesstoken();
     let params = { fields: "items(added_at,added_by,track(album,artists,id,href,uri,name))", offset }
     return this.http.get(url, { headers: { Authorization: 'Bearer ' + token } }).toPromise()
       .catch(() => this.router.navigate(['']))
-
   }
+
   createPlaylist(name, description, user) {
     const token = this.getAccesstoken();
     const httpOptions = {
@@ -46,6 +49,7 @@ export class SpotifyService {
     }
     return this.http.post('https://api.spotify.com/v1/users/' + user + '/playlists', body, httpOptions).toPromise()
   }
+
   insertTracks(user, playlist, tracks) {
     const token = this.getAccesstoken();
     const httpOptions = {

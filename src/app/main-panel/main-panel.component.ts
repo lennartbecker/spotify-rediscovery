@@ -9,20 +9,21 @@ import { MatSnackBar } from '@angular/material';
 })
 export class MainPanelComponent implements OnInit {
 
-  user: string;
-  to:string;
-  from:string;
+  user: string; //User Id
+  to:string; //NgModel for dateinput, used to specify the timeframe
+  from:string;//NgModel for dateinput, used to specify the timeframe
 
-  extraSettings: boolean = false;
-  showTracks: boolean = false;
+  extraSettings: boolean = false; //Show or hide extraSettings panel (exclude Playlists)
+  showTracks: boolean = false; //Show or hide tracks depending on the status of the search
   showSpinner: boolean = true;
 
-  toObj = {
+
+  toObj = {  //Object of the to-Date specified. Used for the playlist naming (e.G. January 27 - February 8 2018)
     year: null,
     month: null,
     day: null
   };
-  fromObj = {
+  fromObj = {  //Object of the from-Date specified. Used for the playlist naming (e.G. January 27 - February 8 2018)
     year: null,
     month: null,
     day: null
@@ -79,9 +80,9 @@ export class MainPanelComponent implements OnInit {
     return filteredPlaylists;
   }
 
-  async getTracks(url, id, name) {
+  async getTracks(url, id, name) { //Get tracks of the specified playlist, id is the spotify playlist id
     let data: any = await this.spotify.getTracks(url)
-    data.items.forEach(track => {
+    data.items.forEach(track => { //Add playlist info to each track for displaying it on the cards
       track.playlist = { id, name }
     });
     this.saveToTracksObject(id, data);
@@ -118,13 +119,11 @@ export class MainPanelComponent implements OnInit {
 
         if (this.playlistsToIgnore.indexOf(playlist) == -1) {
           this.playlists[playlist].forEach(track => {
-
             let date = Date.parse(track.added_at)
 
             if (date > fromDate && date < toDate) {
               this.insertTrack(track, date);
             }
-
           });
 
         }
@@ -168,14 +167,16 @@ export class MainPanelComponent implements OnInit {
       } else {
         name = `${this.fromObj.day} ${this.fromObj.month} ${this.fromObj.year} -  ${this.toObj.day} ${this.toObj.month} ${this.toObj.year}`
       }
-      let playlist = await this.spotify.createPlaylist(name, "Created with Rediscovery", this.user)
+
+      let playlist = await this.spotify.createPlaylist(name, "Created with Rediscovery", this.user) //Returns Id of the created Playlist
+
       this.addTracksToPlaylist(playlist['id'])
     } else {
       console.log('no timeframe specified')
     }
   }
-  async addTracksToPlaylist(id) {
-    this.filteredTracksUris = []
+  async addTracksToPlaylist(id) {   //Get All Tracks the user filtered and use the uris to add the tracks to the created playlist
+    this.filteredTracksUris = [] //todo:change to variable in scope
     for (let i = 0; i < this.filteredTracks.length; i++) {
       this.filteredTracksUris.push("spotify:track:" + this.filteredTracks[i].track.id)
     }
@@ -198,8 +199,8 @@ export class MainPanelComponent implements OnInit {
     this.toObj.day = toDate.getDate()
     this.toObj.year = toDate.getFullYear()
   }
+
   toggleExtraSettings() {
-    console.log("click")
     this.extraSettings = !this.extraSettings;
   }
 }
