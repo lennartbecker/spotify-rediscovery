@@ -121,7 +121,7 @@ export class MainPanelComponent implements OnInit {
           this.playlists[playlist].forEach(track => {
             let date = Date.parse(track.added_at)
 
-            if (date > fromDate && date < toDate) {
+            if (date >= fromDate && date <= toDate) {
               this.insertTrack(track, date);
             }
           });
