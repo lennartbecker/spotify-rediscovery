@@ -112,9 +112,15 @@ export class MainPanelComponent implements OnInit {
         this.to = placeholder;
       }
 
+      const fromWithHoursAdded = new Date(this.from);
+      const toWithHoursAdded = new Date(this.to);
+      toWithHoursAdded.setHours(23,59,59);
+      fromWithHoursAdded.setHours(0,0,0);
+      
       this.filteredTracks = []
-      let toDate = Date.parse(this.to)
-      let fromDate = Date.parse(this.from)
+      let toDate = toWithHoursAdded.getTime();
+      let fromDate = fromWithHoursAdded.getTime();
+      console.log(toWithHoursAdded,fromWithHoursAdded)
       for (const playlist in this.playlists) {
 
         if (this.playlistsToIgnore.indexOf(playlist) == -1) {
