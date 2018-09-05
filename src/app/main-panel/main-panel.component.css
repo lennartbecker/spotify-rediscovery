@@ -1,5 +1,5 @@
 /* *{
-    outline: 1px solid red; 
+    outline: 1px solid red;
 } */
 *{
     color:black;
@@ -22,7 +22,7 @@
   max-width: 600px;
 }
 h1{
-  color: white; 
+  color: white;
 }
 .filterPanel{
     width: 100%;
@@ -69,7 +69,7 @@ mat-datepicker-toggle {
 }
 .filterSettings{
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   justify-content: space-evenly;
   align-content: center;
   padding: 10px;
@@ -90,7 +90,7 @@ mat-datepicker-toggle {
   display: inline-block;
   /* margin: 0 .5% 0 .5%; */
   cursor: pointer;
-  font-weight: 700; 
+  font-weight: 700;
   font-size: 14px;
   line-height: 1;
   border-radius: 500px;
@@ -255,6 +255,9 @@ createPlaylistButtonDiv{
     flex-direction: column;
     align-items: center;
   }
+  .filteredTracks {
+    height: 70vh;
+  }
   .filterButtonDiv{
     width: 150px;
   }
@@ -265,7 +268,7 @@ createPlaylistButtonDiv{
     padding-bottom: 10px;
   }
   .settingsWrap {
-    margin-top: 115px;
+    margin-top: 40px;
     margin-bottom: 40px;
   }
   .card {

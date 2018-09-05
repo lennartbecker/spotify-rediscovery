@@ -11,7 +11,7 @@
     display: inline-block;
     margin: 0 .5% 0 .5%;
     cursor: pointer;
-    font-weight: 700; 
+    font-weight: 700;
     font-size: 14px;
     line-height: 1;
     border-radius: 500px;
@@ -62,7 +62,8 @@ h4{
     display: flex;
     flex-direction: row;
     background-color: white;
-    height: 92vh;
+    min-height: 92vh;
+    height: auto;
     justify-content: center;
     align-content: center;
     /* border-radius: 20px; */
@@ -130,6 +131,27 @@ nav a {
         flex-direction: column-reverse;
     }
 }
+@media only screen and (max-width:950px) {
+  .about {
+    flex-direction: column;
+    height: auto;
+    min-height: 92vh;
+  }
+  .right {
+    width: 90%;
+    padding: 5%;
+  }
+  .heading {
+    font-size: 22px;
+  }
+  .description {
+    font-size: 18px;
+  }
+  .left {
+    display: none;
+  }
+}
+
 .logo {
     height: 27px;
     width: auto
