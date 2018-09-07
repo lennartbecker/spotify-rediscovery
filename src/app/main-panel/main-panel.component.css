@@ -262,6 +262,7 @@ createPlaylistButtonDiv{
   }
   .heading{
     width: 90%;
+    text-align: center;
   }
   .dates {
     margin:0;
