@@ -1,7 +1,6 @@
 <div class="wrapper">
     <div class="filterPanel">
 
-
         <div class="panel">
             <div class="heading" *ngIf="!showTracks">
                 <h1>
@@ -69,6 +68,7 @@
                             <div class="main">
                                 <h3 class="title">{{track.track.name}}</h3>
                                 <p class="artist">{{track.track.artists[0].name}}</p>
+                                <button (click)="play(track)" *ngIf="track.track.preview_url">Play</button>
                                 <!-- <p class="album">{{track.track.album.name}}</p> -->
                             </div>
                         </div>

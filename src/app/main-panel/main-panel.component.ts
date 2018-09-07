@@ -17,6 +17,8 @@ export class MainPanelComponent implements OnInit {
   showTracks: boolean = false; //Show or hide tracks depending on the status of the search
   showSpinner: boolean = true;
 
+  preview = new Audio();
+  playing: boolean = false;
 
   toObj = {  //Object of the to-Date specified. Used for the playlist naming (e.G. January 27 - February 8 2018)
     year: null,
@@ -114,7 +116,7 @@ export class MainPanelComponent implements OnInit {
 
       this.filteredTracks = []
 
-      let toDate = new Date(this.to).setHours(23,59,59);
+      let toDate = new Date(this.to).setHours(23, 59, 59);
       let fromDate = new Date(this.from).setHours(0, 0, 0);
 
 
@@ -125,8 +127,6 @@ export class MainPanelComponent implements OnInit {
             let date = Date.parse(track.added_at)
             if (date >= fromDate && date <= toDate) {
               this.insertTrack(track, date);
-              console.log(fromDate,toDate,date)
-
             }
           });
 
@@ -173,11 +173,9 @@ export class MainPanelComponent implements OnInit {
         name = `${this.fromObj.day} ${this.fromObj.month} ${this.fromObj.year} -  ${this.toObj.day} ${this.toObj.month} ${this.toObj.year}`
       }
 
-      let playlist = await this.spotify.createPlaylist(name, "Created with Rediscovery", this.user) //Returns Id of the created Playlist
+      let playlist = await this.spotify.createPlaylist(name, "Created with Rediscovery: https://rediscovery.lennart.cc", this.user) //Returns Id of the created Playlist
 
       this.addTracksToPlaylist(playlist['id'])
-    } else {
-      console.log('no timeframe specified')
     }
   }
   async addTracksToPlaylist(id) {   //Get All Tracks the user filtered and use the uris to add the tracks to the created playlist
@@ -192,8 +190,9 @@ export class MainPanelComponent implements OnInit {
         this.filteredTracksUris = this.filteredTracksUris.slice(99, this.filteredTracksUris.length);
         await this.spotify.insertTracks(this.user, id, partOfTracks)
       }
+    } else {
+      await this.spotify.insertTracks(this.user, id, this.filteredTracksUris)
     }
-    // await this.spotify.insertTracks(this.user, id, this.filteredTracksUris)
     this.snackBar.open('Playlist creation successfull', 'Gotcha!', {
       duration: 3000
     });
@@ -215,5 +214,20 @@ export class MainPanelComponent implements OnInit {
 
   toggleExtraSettings() {
     this.extraSettings = !this.extraSettings;
+  }
+  play(track) {
+    if (this.preview.src != track.track.preview_url) {
+      this.preview.src = track.track.preview_url;
+      this.preview.load();
+      this.preview.play();
+    } else {
+      if (this.playing) {
+        this.preview.pause()
+      } else {
+        this.preview.play();
+      }
+    }
+
+    this.playing = !this.playing;
   }
 }
