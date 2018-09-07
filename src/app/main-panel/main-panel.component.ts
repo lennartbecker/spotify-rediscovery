@@ -2,6 +2,7 @@ import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
 import { AuthorizeService } from '../authorize.service';
 import { SpotifyService } from '../spotify.service';
 import { MatSnackBar } from '@angular/material';
+import {SlicePipe} from '@angular/common'
 @Component({
   selector: 'app-main-panel',
   templateUrl: './main-panel.component.html',
@@ -18,7 +19,7 @@ export class MainPanelComponent implements OnInit {
   showSpinner: boolean = true;
 
   preview = new Audio();
-  playing: boolean = false;
+  currentlyPlaying: string = '';
 
   toObj = {  //Object of the to-Date specified. Used for the playlist naming (e.G. January 27 - February 8 2018)
     year: null,
@@ -220,14 +221,15 @@ export class MainPanelComponent implements OnInit {
       this.preview.src = track.track.preview_url;
       this.preview.load();
       this.preview.play();
+      this.currentlyPlaying = track.track.preview_url;
     } else {
-      if (this.playing) {
+      if (this.currentlyPlaying) {
         this.preview.pause()
+        this.currentlyPlaying = ''
       } else {
         this.preview.play();
+        this.currentlyPlaying = track.track.preview_url;
       }
     }
-
-    this.playing = !this.playing;
   }
 }

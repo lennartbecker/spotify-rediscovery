@@ -90,11 +90,11 @@ h4{
 .heading {
     font-weight: 600;
     font-size: 27px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 .description {
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 .button-row {
     display: flex;

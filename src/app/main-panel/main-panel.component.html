@@ -1,85 +1,90 @@
 <div class="wrapper">
-    <div class="filterPanel">
+  <div class="filterPanel">
 
-        <div class="panel">
-            <div class="heading" *ngIf="!showTracks">
-                <h1>
-                    Hey {{user}}, please select a timeframe.
-                </h1>
+    <div class="panel">
+      <div class="heading" *ngIf="!showTracks">
+        <h1>
+          Hey {{user}}, please select a timeframe.
+        </h1>
+      </div>
+      <div class="settingsWrap">
+        <div class="filterSettings">
+          <div class="dates">
+            <div class="dateInput">
+              <input [matDatepicker]="fromPicker" (click)="fromPicker.open()" [(ngModel)]="from" placeholder="From">
+              <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+              <mat-datepicker #fromPicker></mat-datepicker>
             </div>
-            <div class="settingsWrap">
-                <div class="filterSettings">
-                    <div class="dates">
-                        <div class="dateInput">
-                            <input [matDatepicker]="fromPicker" (click)="fromPicker.open()" [(ngModel)]="from" placeholder="From">
-                            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
-                            <mat-datepicker #fromPicker></mat-datepicker>
-                        </div>
-                        <div class="dateInput">
-                            <input matInput [matDatepicker]="toPicker" (click)="toPicker.open()" [(ngModel)]="to" placeholder="To">
-                            <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
-                            <mat-datepicker #toPicker></mat-datepicker>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <div class="filterButtonDiv">
-                            <div class="loading" *ngIf="showSpinner"></div>
-                            <a *ngIf="showSpinner" class="filterButton disabled"></a>
-                            <a (click)="runFilter()" class="filterButton" *ngIf="!showSpinner">Get Tracks</a>
-                        </div>
-                        <div class="filterButtonDiv" *ngIf="showTracks">
-
-                            <a (click)="createPlaylist()" class="createPlaylistButton">Create Playlist</a>
-                        </div>
-                    </div>
-                    <div class="extraSettingsToggle" (click)="toggleExtraSettings()">
-                        <i class="fas fa-cog"></i>
-                    </div>
-
-                </div>
-                <div class="extraSettings" *ngIf="extraSettings">
-                    <div class="ignorePlaylist">
-                        <mat-select placeholder="Playlists to exclude" multiple [(ngModel)]="playlistsToIgnore">
-                            <mat-option *ngFor="let playlist of playlistNames" [value]="playlist.id">{{playlist.name}}</mat-option>
-                        </mat-select>
-                    </div>
-                </div>
+            <div class="dateInput">
+              <input matInput [matDatepicker]="toPicker" (click)="toPicker.open()" [(ngModel)]="to" placeholder="To">
+              <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+              <mat-datepicker #toPicker></mat-datepicker>
             </div>
-        </div>
-        <div class="filteredTracks" *ngIf="showTracks">
-            <div class="card-grid">
-
-                <div class="card" *ngFor="let track of filteredTracks">
-                    <div class="front">
-                        <div class="image" [ngStyle]="{'background-image': 'url(' + track.track.album.images[1].url + ')'}">
-                            <!-- <img *ngIf="track.track.album.images" src="{{track.track.album.images[1].url}}" alt=""> -->
-                        </div>
-                        <div class="info">
-                            <div class="extra_info">
-                                <div class="date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    <p>{{track.added_at| amDateFormat:'MMMM Do YYYY'}}</p>
-                                </div>
-                                <p>Playlist:</p>
-                                <p>
-                                    <b>{{track.playlist.name}}</b>
-                                </p>
-                            </div>
-                            <div class="main">
-                                <h3 class="title">{{track.track.name}}</h3>
-                                <p class="artist">{{track.track.artists[0].name}}</p>
-                                <button (click)="play(track)" *ngIf="track.track.preview_url">Play</button>
-                                <!-- <p class="album">{{track.track.album.name}}</p> -->
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
+          </div>
+          <div class="buttons">
+            <div class="filterButtonDiv">
+              <div class="loading" *ngIf="showSpinner"></div>
+              <a *ngIf="showSpinner" class="filterButton disabled"></a>
+              <a (click)="runFilter()" class="filterButton" *ngIf="!showSpinner">Get Tracks</a>
             </div>
+            <div class="filterButtonDiv" *ngIf="showTracks">
+
+              <a (click)="createPlaylist()" class="createPlaylistButton">Create Playlist</a>
+            </div>
+          </div>
+          <div class="extraSettingsToggle" (click)="toggleExtraSettings()">
+            <i class="fas fa-cog"></i>
+          </div>
 
         </div>
+        <div class="extraSettings" *ngIf="extraSettings">
+          <div class="ignorePlaylist">
+            <mat-select placeholder="Playlists to exclude" multiple [(ngModel)]="playlistsToIgnore">
+              <mat-option *ngFor="let playlist of playlistNames" [value]="playlist.id">{{playlist.name}}</mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="filteredTracks" *ngIf="showTracks">
+      <div class="card-grid">
+
+        <div class="card" *ngFor="let track of filteredTracks">
+          <div class="front">
+            <div class="image" [ngStyle]="{'background-image': 'url(' + track.track.album.images[1].url + ')'}">
+              <!-- <img *ngIf="track.track.album.images" src="{{track.track.album.images[1].url}}" alt=""> -->
+            </div>
+            <div class="info">
+              <div class="extra_info">
+                <div class="date">
+                  <i class="far fa-calendar-alt"></i>
+                  <p>{{track.added_at| amDateFormat:'MMMM Do YYYY'}}</p>
+                </div>
+                <p>Playlist:</p>
+                <p>
+                  <b>{{track.playlist.name}}</b>
+                </p>
+              </div>
+              <div class="main">
+                <div class="left">
+                  <h3 class="title">{{track.track.name}}</h3>
+                  <p class="artist">{{track.track.artists[0].name}}</p>
+                </div>
+                <div class="right">
+                  <a (click)="play(track)" *ngIf="track.track.preview_url">
+                    <i class="fas fa-play" *ngIf="currentlyPlaying != track.track.preview_url; else pauseButton"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
+
+  </div>
 </div>
+<ng-template #pauseButton>
+  <i class="fas fa-pause"></i>
+</ng-template>

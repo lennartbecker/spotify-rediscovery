@@ -33,6 +33,9 @@ h1{
     align-content: center;
     align-items: center;
 }
+.title {
+  margin-bottom: 10px;
+}
 .dateInput{
   border: 1px solid #c8c8c8;
   padding: 0px 10px 0px 17px;
@@ -223,8 +226,21 @@ createPlaylistButtonDiv{
 }
 .main{
   display: flex;
+  flex-direction: row;
+}
+.left{
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 90%;
+}
+.right{
+  width: 10%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  cursor: pointer;
+
 }
 .artist{
   font-size: 15px;
