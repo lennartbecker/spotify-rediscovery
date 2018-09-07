@@ -170,7 +170,7 @@ createPlaylistButtonDiv{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 10px;
+  border-radius: 15px;
 }
 .image{
   /* background-image:url('https://f4.bcbits.com/img/a0042959868_10.jpg'); */

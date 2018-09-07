@@ -112,37 +112,36 @@ export class MainPanelComponent implements OnInit {
         this.to = placeholder;
       }
 
-      const fromWithHoursAdded = new Date(this.from);
-      const toWithHoursAdded = new Date(this.to);
-      toWithHoursAdded.setHours(23,59,59);
-      fromWithHoursAdded.setHours(0,0,0);
-      
       this.filteredTracks = []
-      let toDate = toWithHoursAdded.getTime();
-      let fromDate = fromWithHoursAdded.getTime();
-      console.log(toWithHoursAdded,fromWithHoursAdded)
+
+      let toDate = new Date(this.to).setHours(23,59,59);
+      let fromDate = new Date(this.from).setHours(0, 0, 0);
+
+
       for (const playlist in this.playlists) {
 
         if (this.playlistsToIgnore.indexOf(playlist) == -1) {
           this.playlists[playlist].forEach(track => {
             let date = Date.parse(track.added_at)
-
             if (date >= fromDate && date <= toDate) {
               this.insertTrack(track, date);
+              console.log(fromDate,toDate,date)
+
             }
           });
 
         }
       }
+
       this.filteredTracks.sort(function (a, b) {
         return Date.parse(a.added_at) - Date.parse(b.added_at)
       })
+
       if (this.filteredTracks.length == 0) {
         this.showTracks = false;
         this.snackBar.open('Sorry, you added no tracks during that time. Maybe try a different one?', '', {
           duration: 3000
         })
-
       } else {
         this.showTracks = true;
       }
@@ -187,12 +186,11 @@ export class MainPanelComponent implements OnInit {
       this.filteredTracksUris.push("spotify:track:" + this.filteredTracks[i].track.id)
     }
     if (this.filteredTracksUris.length >= 100) {
-      console.log(this.filteredTracksUris)
+
       while (this.filteredTracksUris.length != 0) {
         let partOfTracks = this.filteredTracksUris.slice(0, 99);
         this.filteredTracksUris = this.filteredTracksUris.slice(99, this.filteredTracksUris.length);
         await this.spotify.insertTracks(this.user, id, partOfTracks)
-
       }
     }
     // await this.spotify.insertTracks(this.user, id, this.filteredTracksUris)
