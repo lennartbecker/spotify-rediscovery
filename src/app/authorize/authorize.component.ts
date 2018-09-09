@@ -18,7 +18,7 @@ export class AuthorizeComponent implements OnInit {
     let urlParams = this.route.snapshot.fragment.split("&");
     this.auth.setAccessToken(urlParams[0].split("=")[1])
 
-    this.router.navigate(['/rediscover'])
+    this.router.navigate(['/search'])
   }
 
 }
