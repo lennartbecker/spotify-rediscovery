@@ -66,7 +66,7 @@ export class MainPanelComponent implements OnInit {
     let playlist: any = await this.spotify.getPlaylists(offset, limit)
     prevPlaylists.push(...playlist.items)
     if (playlist.next) {
-      offset = +20
+      offset += 20;
       return this.getPlayLists(offset, limit, prevPlaylists)
     } else {
       return prevPlaylists
