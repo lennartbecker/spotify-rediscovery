@@ -50,6 +50,13 @@ export class MainPanelComponent implements OnInit {
     this.playlistNames = await this.getPlayLists()
     this.playlistNames = this.filterForUsersPlaylists(this.playlistNames) //Filter Out playlists that the user follows
 
+    this.playlistNames.push({
+      tracks: {
+        href: 'https://api.spotify.com/v1/me/tracks'
+      },
+      id:'likes',
+      name: 'Likes'
+    })
     for (let i = 0; i < this.playlistNames.length; i++) {
       let playlist = this.playlistNames[i]
       await this.getTracks(playlist.tracks.href, playlist.id, playlist.name)
