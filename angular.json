@@ -21,7 +21,8 @@
             "assets": [
               "src/favicon.ico",
               "src/favicon-32x32.png",
-              "src/assets"
+              "src/assets",
+              "src/_redirects"
             ],
             "styles": [
               "src/styles.css"
