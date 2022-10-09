@@ -51,7 +51,7 @@
 
         <div class="card" *ngFor="let track of filteredTracks">
           <div class="front">
-            <div class="image" [ngStyle]="{'background-image': 'url(' + track.track.album.images[1].url + ')'}">
+            <div class="image" [ngStyle]="{'background-image': 'url(' + track.track.album.images[1].url + ')'}" *ngIf="track.track.name">
               <!-- <img *ngIf="track.track.album.images" src="{{track.track.album.images[1].url}}" alt=""> -->
             </div>
             <div class="info">
